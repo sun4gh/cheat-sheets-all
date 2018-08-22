@@ -9,3 +9,4 @@ Rename on github, then re-clone on the local.
 
 Merge changes on github to local repo
   git pull
+https://git-scm.com/docs/git-pull
