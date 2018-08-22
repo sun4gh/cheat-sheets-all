@@ -6,3 +6,9 @@ http://neuralnetworksanddeeplearning.com/chap1.html
 
 Review:
 (pending)
+
+
+http://cs231n.github.io/classification/
+- if you're not familiar with python, or the conventiont that numpy is imported as np, this will be confusing
+- on the other hand, there's an introduction to python as part of the same article series
+- you need to undestand things like "dimension" - which are not explained in this article, but possibly in the prev - will review
