@@ -6,3 +6,6 @@ Navigate to the parent directory of your choice, to execute:
 
 Renaming a repo?
 Rename on github, then re-clone on the local.
+
+Merge changes on github to local repo
+  git pull
