@@ -3,3 +3,6 @@ https://help.github.com
 Cloning will create a parent directory for the repo, inside of which there will be the .git repo, and the working files
 Navigate to the parent directory of your choice, to execute:
   git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+
+Renaming a repo?
+Rename on github, then re-clone on the local.
