@@ -10,3 +10,13 @@ Rename on github, then re-clone on the local.
 Merge changes on github to local repo
   git pull
 https://git-scm.com/docs/git-pull
+
+"""
+git pull origin master
+  pulls the master branch from the remote called origin into your current branch. It only affects your current branch, not your local master branch.
+https://stackoverflow.com/questions/8746631/what-happens-when-i-do-git-pull-origin-master-in-the-develop-branch
+essentially a combination of 
+  git fetch
+and
+  git merge
+"""
