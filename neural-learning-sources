@@ -1,5 +1,22 @@
 Contains learning sources for neural networks and/or python
 
+Len and Arrays
+
+>>> train_data.shape
+(60000, 28, 28)
+>>> len(train_data)
+60000
+
+>>> myList = [ 'a', 'b', 'c']
+>>> len(myList)
+3
+>>> anotherList = np.zeros( (2,3))
+>>> anotherList
+array([[0., 0., 0.],
+       [0., 0., 0.]])
+>>> len(anotherList)
+2
+
 
 http://cs231n.github.io/convolutional-networks/ 
 http://neuralnetworksanddeeplearning.com/chap1.html
