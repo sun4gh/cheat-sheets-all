@@ -30,6 +30,13 @@ gives you a list of branches
 	git -d a-specific-branch
 will delete it. You might need to override complaint using -D instead of -d
 
+Deleted a branch that wasn't merged?
+	git reflog
+then, find the SHA1 for the commit at the tip of your deleted branch, then just 
+	git checkout [sha]
+And once you're at that commit, you can just git checkout -b [branchname] to recreate the branch from there.
+
+
 FIX WRONG EMAIL USERNAME
 (from https://www.git-tower.com/learn/git/faq/change-author-name-email)
 
