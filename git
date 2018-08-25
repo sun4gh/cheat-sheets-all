@@ -23,6 +23,12 @@ and
 	git merge
 """
 
+BRANCHES
+	git branch
+gives you a list of branches
+
+	git -d a-specific-branch
+will delete it. You might need to override complaint using -D instead of -d
 
 FIX WRONG EMAIL USERNAME
 (from https://www.git-tower.com/learn/git/faq/change-author-name-email)
