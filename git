@@ -1,22 +1,57 @@
 https://help.github.com
 
+CREATE LOCAL DIR BEFORE CLONE?
 Cloning will create a parent directory for the repo, inside of which there will be the .git repo, and the working files
 Navigate to the parent directory of your choice, to execute:
   git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+this will create a directory whose name is the repo you're cloning.
 
-Renaming a repo?
+RENAME A REPO
 Rename on github, then re-clone on the local.
 
+MERGING
 Merge changes on github to local repo
   git pull
 https://git-scm.com/docs/git-pull
 
-"""
-git pull origin master
-  pulls the master branch from the remote called origin into your current branch. It only affects your current branch, not your local master branch.
-https://stackoverflow.com/questions/8746631/what-happens-when-i-do-git-pull-origin-master-in-the-develop-branch
+""" (https://stackoverflow.com/questions/8746631/what-happens-when-i-do-git-pull-origin-master-in-the-develop-branch)
+	git pull origin master
+pulls the master branch from the remote called origin into your current branch. It only affects your current branch, not your local master branch.
 essentially a combination of 
-  git fetch
+	git fetch
 and
-  git merge
+	git merge
 """
+
+
+FIX WRONG EMAIL USERNAME
+(from https://www.git-tower.com/learn/git/faq/change-author-name-email)
+
+run this from prompt
+$ git filter-branch --env-filter '
+WRONG_EMAIL="wrong@example.com"
+NEW_NAME="New Name Value"
+NEW_EMAIL="correct@example.com"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$NEW_NAME"
+    export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$WRONG_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$NEW_NAME"
+    export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
+
+
+THEN
+
+git push --force --tags origin 'refs/heads/*'
+(from https://help.github.com/articles/changing-author-info/)
+
+
+this might be useful
+https://gist.github.com/carlosmcevilly/2221249
+
