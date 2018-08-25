@@ -58,6 +58,7 @@ then
 fi
 ' --tag-name-filter cat -- --branches --tags
 
+(Note: if you get a warning about a backup already existing, add the flag -f after filter-branch)
 
 THEN
 
