@@ -1,0 +1,38 @@
+
+Pass by Reference, by Value, and by Object (Reference)
+
+def ref_demo(x):
+    print "x=",x," id=",id(x)
+    x=42
+    print "x=",x," id=",id(x)
+
+x = 9
+id(x)
+ref_demo(x)
+id(x)
+
+x = 10
+y = x
+id(x) == id(y)
+id(y) == id(10)
+x = x+1   # because "10" is immutable, this changes x to point to "11" (also immutable), while y still points to "10"
+print x, y
+id(x)==id(y)
+id(x)==id(10)
+id(y)==id(10)
+id(x)==id(11)
+
+m = list( [1,2,3,4,5])
+n = m ; print "length is ", len(m)
+print "are they the same object? ",; id(m)==id(n)
+m.pop() # because the list is mutable, this changes the list object rather than change the reference (to an object)
+print "m==n returns",  m == n, ",", ; print "length is ", len(m)  # which makes both n, m be identical again
+
+Since everything in Python is an Object, every variable holds an object instance. When an object is initiated, it is assigned a unique object id. 
+
+Simple put, a mutable object can be changed after it is created, and an immutable object can't. Objects of built-in types like (int, float, bool, str, tuple, unicode) are immutable. Objects of built-in types like (list, set, dict) are mutable. Custom classes are generally mutable.
+
+Objects of built-in types like (int, float, bool, str, tuple, unicode) are immutable. Objects of built-in types like (list, set, dict) are mutable. Custom classes are generally mutable. 
+
+Immutable objects are fundamentally expensive to “change”, because doing so involves creating a copy. Changing mutable objects is cheap.
+https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747
