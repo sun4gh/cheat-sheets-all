@@ -1,15 +1,5 @@
 
-Pass by Reference, by Value, and by Object (Reference)
-
-def ref_demo(x):
-    print "x=",x," id=",id(x)
-    x=42
-    print "x=",x," id=",id(x)
-
-x = 9
-id(x)
-ref_demo(x)
-id(x)
+Mutable vs. Immutable 
 
 x = 10
 y = x
@@ -17,10 +7,10 @@ id(x) == id(y)
 id(y) == id(10)
 x = x+1   # because "10" is immutable, this changes x to point to "11" (also immutable), while y still points to "10"
 print x, y
-id(x)==id(y)
-id(x)==id(10)
-id(y)==id(10)
-id(x)==id(11)
+id(x)==id(y)    # no longer the same reference
+id(x)==id(10)   # no longer the same reference
+id(y)==id(10)   # these are the same reference
+id(x)==id(11)   # these are the same refernece
 
 m = list( [1,2,3,4,5])
 n = m ; print "length is ", len(m)
@@ -35,4 +25,33 @@ Simple put, a mutable object can be changed after it is created, and an immutabl
 Objects of built-in types like (int, float, bool, str, tuple, unicode) are immutable. Objects of built-in types like (list, set, dict) are mutable. Custom classes are generally mutable. 
 
 Immutable objects are fundamentally expensive to “change”, because doing so involves creating a copy. Changing mutable objects is cheap.
+
 https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747
+
+
+Pass by Reference, by Value, and by Object (Reference)
+
+if you pass a parameter to a function, it is passed by object reference, that is the reference to the object itself (and not the reference to the variable)
+For example,
+
+def incrementNumber(n):
+    print n
+    print id(n)
+    n = n+1
+    print n
+    print id(n)
+n = 5
+incrementNumber(n)
+print n         # this is 5, not 6, because 5 is immutable, so inside the function a new object (the number 6) was created
+
+def ref_demo(x):
+    print "x=",x," id=",id(x)
+    x=42
+    print "x=",x," id=",id(x)
+
+x = 9
+id(x)
+ref_demo(x)
+id(x)
+
+
