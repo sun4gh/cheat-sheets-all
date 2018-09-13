@@ -1,0 +1,12 @@
+ls -d */
+	Will list all directories, but no files. "Directories are listed as plain files (not searched recursively)"
+	Adding -R makes it recursive but then it lists files too.
+      
+ls -m
+	lists files comma separated
+	
+	
+ls -p
+	add / after a directory
+ls -G
+	Enable colorized output (see CLICOLOR)
