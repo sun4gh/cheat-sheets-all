@@ -55,3 +55,13 @@ ref_demo(x)
 id(x)
 
 
+What methods are available for an object?
+=========================================
+
+methodList = [method for method in dir(object) if callable(getattr(object, method))]
+    where object is your object
+ex. 
+x = [2,3,4]
+xlist = [method for method in dir(x) if callable(getattr(x, method))]
+    
+http://www.diveintopython.net/power_of_introspection/index.html
