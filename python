@@ -88,3 +88,10 @@ Need a quik dictionary for some experiments?
 >>>d = {k: random.random() for k in range(100)}
 >>>type(d)
 <type 'dict'>
+
+
+Comparing Types
+===============
+if you want to a class and subclass instances to show as same type, use isinstance 
+https://docs.quantifiedcode.com/python-anti-patterns/readability/do_not_compare_types_use_isinstance.html
+https://stackoverflow.com/questions/1549801/what-are-the-differences-between-type-and-isinstance
