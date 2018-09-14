@@ -82,3 +82,9 @@ or (1 liner)
 import readline; print '\n'.join([str(readline.get_history_item(i)) for i in range(readline.get_current_history_length())])
 https://stackoverflow.com/questions/6558765/how-do-you-see-the-entire-command-history-in-interactive-python
 
+
+Need a quik dictionary for some experiments?
+============================================
+>>>d = {k: random.random() for k in range(100)}
+>>>type(d)
+<type 'dict'>
