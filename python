@@ -1,5 +1,6 @@
 
-Mutable vs. Immutable 
+Mutable vs. Immutable
+=====================
 
 x = 10
 y = x
@@ -30,6 +31,7 @@ https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747
 
 
 Pass by Reference, by Value, and by Object (Reference)
+======================================================
 
 if you pass a parameter to a function, it is passed by object reference, that is the reference to the object itself (and not the reference to the variable)
 For example,
@@ -65,3 +67,15 @@ x = [2,3,4]
 xlist = [method for method in dir(x) if callable(getattr(x, method))]
     
 http://www.diveintopython.net/power_of_introspection/index.html
+
+
+View History in Python Interpreter
+==================================
+import readline
+for i in range(readline.get_current_history_length()):
+    print readline.get_history_item(i + 1)
+
+or (1 liner)
+import readline; print '\n'.join([str(readline.get_history_item(i)) for i in range(readline.get_current_history_length())])
+https://stackoverflow.com/questions/6558765/how-do-you-see-the-entire-command-history-in-interactive-python
+
