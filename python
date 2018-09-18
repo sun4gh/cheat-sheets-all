@@ -95,3 +95,15 @@ Comparing Types
 if you want to a class and subclass instances to show as same type, use isinstance 
 https://docs.quantifiedcode.com/python-anti-patterns/readability/do_not_compare_types_use_isinstance.html
 https://stackoverflow.com/questions/1549801/what-are-the-differences-between-type-and-isinstance
+
+
+You need a list of comma separated emails and you have a copy of addresses from Outlook
+=======================================================================================
+# copy from outlook will be semi-colon separated string in this format: first last <first.last@company.com> ; etc.
+>>>a = raw_input("Paste the copy from Outlook here: ") 
+
+>>>b = a.split(";")
+>>>c = ' , '.join([  b[i][ b[i].find("<")+1 : b[i].find(">") ] for i in range(len(b))   ])
+
+
+
