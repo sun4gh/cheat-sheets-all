@@ -106,4 +106,23 @@ You need a list of comma separated emails and you have a copy of addresses from 
 >>>c = ' , '.join([  b[i][ b[i].find("<")+1 : b[i].find(">") ] for i in range(len(b))   ])
 
 
+Managing Python Packages
+========================
+
+#this lists all the packages that are outdated, excluding the heading "Package" and the underline "----"
+#using pip 18.0 from /Library/Python/2.7/site-packages/pip (python 2.7)
+pip list --outdated | awk '{ print $1 }' | grep -vwE "(----|Package)"
+
+pip install $(pip list --outdated | awk '{ print $1 }' | grep -vwE "(----|Package)") --upgrade
+
+#sudo .. (this might be needed)
+sudo pip install $(pip list --outdated | awk '{ print $1 }' | grep -vwE "(----|Package)") --upgrade
+
+
+
+#to see information about each module. Use --verbose also
+pip show $(pip list  | awk '{ print $1 }' | grep -vE "(----|Package)" ) | less
+
+
+
 
