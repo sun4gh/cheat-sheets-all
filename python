@@ -2,6 +2,30 @@ Resources
 =========
 http://www.diveintopython.net
 
+Reversing a list in place or in new list
+========================================
+>>> L =[ "one", 2, "three"]
+>>> L
+['one', 2, 'three']
+>>> L.reverse() #reverses in place
+>>> L
+['three', 2, 'one']
+>>> 
+>>> L =[ "one", 2, "three"]
+>>> L[::-1]     #returns new list
+['three', 2, 'one']
+>>> L
+['one', 2, 'three']
+>>> K = L[::-1]
+>>> K
+['three', 2, 'one']
+>>> L =[ "one", 2, "three"]
+>>> K = list(reversed(L))   #new list
+>>> K
+['three', 2, 'one']
+
+
+
 Mutable vs. Immutable
 =====================
 
