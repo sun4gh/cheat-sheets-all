@@ -148,5 +148,10 @@ sudo pip install $(pip list --outdated | awk '{ print $1 }' | grep -vwE "(----|P
 pip show $(pip list  | awk '{ print $1 }' | grep -vE "(----|Package)" ) | less
 
 
+JSON vs. Dictionaries
+=====================
+
+Not the same. JSON is a format that serializes/represents structured data as a string. A dictionary is structured data. 
+https://www.reddit.com/r/learnpython/comments/4izfn9/dicts_vs_json/
 
 
