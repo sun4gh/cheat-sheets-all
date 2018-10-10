@@ -155,3 +155,90 @@ Not the same. JSON is a format that serializes/represents structured data as a s
 https://www.reddit.com/r/learnpython/comments/4izfn9/dicts_vs_json/
 
 
+Enumerate() and Iter()
+======================
+https://www.programiz.com/python-programming/iterator
+https://www.geeksforgeeks.org/enumerate-in-python/
+
+Iter() creates iteratOR objects from iterABLE objects
+next() returns the next item from the iteratOR
+(for-loops also create iterator objects)
+
+enumerate() creates an enumerate object from iteratABLE objects
+next() returns the next enumeratED object
+
+>> a = ['one', 'two', 3, 'four']
+>>> for i in a:
+...     print i
+... 
+one
+two
+3
+four
+
+
+#Using iter() and next()
+>>> c = iter(a)
+>>> c
+<listiterator object at 0x1014ec110>
+>>> next(c)
+'one'
+>>> next(c)
+'two'
+>>> next(c)
+3
+>>> next(c)
+'four'
+>>> next(c)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+#Using enumerate() and next()
+>>> b = enumerate(a)
+>>> b
+<enumerate object at 0x1014e34b0>
+>>> next(b)
+(0, 'one')
+>>> next(b)
+(1, 'two')
+>>> next(b)
+(2, 3)
+>>> next(b)
+(3, 'four')
+>>> next(b)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+#iter() in for loops
+>>> for i in iter(a):
+...     print i
+... 
+one
+two
+3
+four
+
+#enumerate in for loops
+>>> for i in enumerate(a):
+...     print i
+... 
+(0, 'one')
+(1, 'two')
+(2, 3)
+(3, 'four')
+>>> for counter, value in enumerate(a):
+...     print counter, value
+... 
+0 one
+1 two
+2 3
+3 four
+>>> for i in enumerate(a, 1000):        # reset the counter
+...     print i
+... 
+(1000, 'one')
+(1001, 'two')
+(1002, 3)
+(1003, 'four')
