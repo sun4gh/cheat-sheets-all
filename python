@@ -25,6 +25,44 @@ Reversing a list in place or in new list
 ['three', 2, 'one']
 
 
+List Slicing
+============
+>>> x = [0,1, 'world']
+>>> x 
+[0, 1, 'world']
+>>> x[0:2] = ['hello']      # 0th pointer is right before the 0th element, and 1th pointer is right before 1st elemetn
+>>> x                       # so 0:2 grabs the 0th and 1st elements. (0:1 would be only one element) 2-0 = 2 (2 elements)
+['hello', 'world']
+
+>>> x = [0,1, 'world']
+>>> x
+[0, 1, 'world']
+>>> x[0:2] = [ 'hello'] * 2 
+>>> x
+['hello', 'hello', 'world']
+
+>>> x = [0,1, 'world']
+>>> x
+[0, 1, 'world']
+>>> x[0:2] = [9] *2         # [9] is a list (which is iterable)
+>>> x
+[9, 9, 'world']
+
+>>> x = [0,1, 'world']
+>>> x
+[0, 1, 'world']
+>>> x[0:2] = 'hello'        # again selects the first two elements, this time replacing them with an iterable from 'hello'
+>>> x
+['h', 'e', 'l', 'l', 'o', 'world']
+
+>>> x = [0,1, 'world']
+>>> x
+[0, 1, 'world']
+>>> x[0:2] = 9              # 9 is an object, it is not iterable
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only assign an iterable
+
 
 Mutable vs. Immutable
 =====================
