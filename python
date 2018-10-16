@@ -94,6 +94,122 @@ Immutable objects are fundamentally expensive to “change”, because doing so 
 
 https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747
 
+More on name binding on mutable objects
+=======================================
+
+>>> a = [ [1,2,3] , [4,5,6] ]
+>>> for item in a:              # here we are binding the new name "item" to objects that make up the iterable list "a"
+...     print item, id(item)
+... 
+[1, 2, 3] 4512492216      # the name "item" is bound to the same object that a[0] (or later in the loop, a[1]) are bound
+[4, 5, 6] 4512613080
+>>> id(a[0])
+4512492216                # this is the same object as the object that "item" name was bound to
+>>> id(a[1])
+4512613080
+
+>>> for item in a:
+...     item = 3                # this rebinds the name "item" to 3, which means "item" is now pointing to object "3"
+...     print item, id(item)    # but that does nothing to modify the list "a".
+... 
+3 140518349624408               # brand new object "3" 
+3 140518349624408
+>>> a                           # while the list hasn't changed
+[[1, 2, 3], [4, 5, 6]]
+ 
+>>> for item in a:                  # will "item" bound to a list element like a[0] mutate the a[0] object 
+...     item = ['apple', 'peach']   # when "item" is rebound to a new list?
+...     print item, id(item)
+... 
+['apple', 'peach'] 4512613296       # a new object gets created for this list of strings, and both occurences of "item" 
+['apple', 'peach'] 4512613296       # in the loop point (bind) to that object
+>>> a
+[[1, 2, 3], [4, 5, 6]]              # but they were rebinds of the name "item" so they did not affect the original list "a".
+
+>>> for item in a:
+...     item[:] = ['apple', 'peach']    # rather than rebind "item", here we take the object pointed TO and slice it
+...     print item, id(item)            # we are the 0th and 1st list elements from pointing to the 3 elements
+...                                     # to now point to two other elements.
+['apple', 'peach'] 4512492216
+['apple', 'peach'] 4512613080
+>>> a
+[['apple', 'peach'], ['apple', 'peach']]    #... thereby changing the list "a" itself.
+>>> id(a[0])
+4512492216
+>>> id(a[1])
+4512613080
+
+Now for immutable objects (tuples), inside a mutable object (a list)
+
+>>> b = [ (1,2,3) , (4,5,6) ]
+>>> for item in b:
+...     print item, id(item)
+... 
+(1, 2, 3) 4512337184
+(4, 5, 6) 4512529056
+>>> for item in b:
+...     item = 3                # rebinding of name "item"
+...     print item, id(item)
+... 
+3 140518349624408
+3 140518349624408
+>>> b
+[(1, 2, 3), (4, 5, 6)]
+>>> for item in b:
+...     item = (7,8,9)          # rebinding of name "item" (but no attempt to change the object pointed at by b[0], b[1]
+...     print item, id(item)
+... 
+(7, 8, 9) 4512529296
+(7, 8, 9) 4512529296
+>>> b
+[(1, 2, 3), (4, 5, 6)]          # which leaves b the same.
+
+
+
+>>> for item in b:
+...     item[:] = (7,8,9)       # tuples are immutable, we cannot mutate a tuple from (1,2,3) to become (7,8,9)
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+TypeError: 'tuple' object does not support item assignment
+
+>>> for count, item in enumerate(b):
+...     b[count] = (7,8,9)      # this is a rebinding of an element in a list. In the list b[count] can be made to point to a new tuple
+                                # very explicitly modifying the list here, we're not using "item"
+...     print b[count], id(b[count])
+... 
+(7, 8, 9) 4512529296
+(7, 8, 9) 4512529296
+>>> b
+[(7, 8, 9), (7, 8, 9)]          # ...which is why the list of tuples has been MODIFIED, but we haven't modified any tuples yet
+
+>>> for count, item in enumerate(b):
+...     for changeCount, newValue in enumerate( (10,11,12)):  #the function enumerate gets one argument which is a tuple, no second optional argument
+...             b[count][changeCount] = newValue              #here we attempt to mutate the object pointed at 
+...             print newValue, id(b[count][changeCount])     
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+TypeError: 'tuple' object does not support item assignment    #but even though you can make a list element b[0] point to a brand new tuple (7,8,9) as done above,
+                                                              #you cannot make the tuple's 0th element b[0][0] point to a new object
+
+This also shows the immutability:
+>>> b[0]
+(7, 8, 9)
+>>> b[0][0]
+7
+>>> b[0][0] = 5
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+
+>>> for changeCount , newValue in enumerate ( (10,11,12) ):   # for clarity on what this line attempted
+...     print changeCount, newValue
+... 
+0 10
+1 11
+2 12
+
 
 Pass by Reference, by Value, and by Object (Reference)
 ======================================================
