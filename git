@@ -2,7 +2,25 @@ git config --global user.email "your_email@example.com
 
 https://help.github.com
 
+Global gitignore
+================
+git config --global core.excludesfile
+	will show you which file if any is configured as a global .gitignore
+
+
+Aliases to simplify looking at branches
+=======================================
+$ git config --global -e 
+
+[alias]
+        lg = log --graph --oneline --decorate
+        lga = log --graph --oneline --decorate --all
+        lol = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative
+        lola = !git lol --all && 0
+
+
 CREATE LOCAL DIR BEFORE CLONE?
+=============================
 Cloning will create a parent directory for the repo, inside of which there will be the .git repo, and the working files
 Navigate to the parent directory of your choice, to execute:
   git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
