@@ -3,13 +3,21 @@ http://www.fast.ai
 https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html
 https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052
 
+Neural Network Tutorials
+========================
+https://www.kdnuggets.com/2018/10/simple-neural-network-python.html
+https://www.analyticsvidhya.com/blog/2017/05/neural-network-from-scratch-in-python-and-r/   (recommended, not read)
+
+One Hot Encoding
+================
+https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f     (well explained)
+
+Word Embeddings
+===============
+https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/     (intuitive understanding)
+
 MSFT Cognitive Services
+=======================
 https://azure.microsoft.com/en-us/services/cognitive-services/
 https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/
 https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/python
-
-Simple Neural Network Tutorials:
-https://www.kdnuggets.com/2018/10/simple-neural-network-python.html
-
-One Hot Encoding well explained:
-https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f
