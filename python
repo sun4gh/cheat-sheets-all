@@ -396,3 +396,26 @@ four
 (1001, 'two')
 (1002, 3)
 (1003, 'four')
+
+List Comprehensions
+===================
+
+    [expression for item in list]
+this returns a list - don't forget the square brackets
+
+>>> [x for x in range(20) if x%2 ==0 if x%5==0]
+[0, 10]
+>>> ["Even" if i%2==0 else "Odd" for i in range(10)]
+['Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd', 'Even', 'Odd']
+the variable i exists beyond the end of the comprehension, just like in a for loop
+
+Nested list comprehension:
+>>> N = 40
+>>> [p for p in range(2,N) if 0 not in [p%d for d in range(2,p)]]   #print prime numbers
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+http://code.activestate.com/recipes/162479-generating-a-list-of-prime-numbers-in-one-statemen/
+
+
+https://www.programiz.com/python-programming/list-comprehension#lcvf   (good explanation, vs. lambda, vs. loops)
+https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
+https://en.wikipedia.org/wiki/List_comprehension (for more information/references on List Comprehensions)
