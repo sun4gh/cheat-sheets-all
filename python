@@ -426,5 +426,53 @@ Environment and Interpreter
 https://jakevdp.github.io/PythonDataScienceHandbook/01.02-shell-keyboard-shortcuts.html
 
 
+Evaluation Order
+================
+"So evaluation of the right-hand side is left-to-right. But the RHS is always evaluated before binding anything to the LHS"
+https://stackoverflow.com/questions/29753335/is-python-assignment-strictly-evaluated-right-to-left
 
+>>> def foo(x):
+...     return x+3
+... 
+>>> foo(15)
+18
+>>> a, b, c = 3, foo(a), foo(b)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+
+>>> x = [2,3,4,5,6]
+>>> x.pop(-3)
+4
+>>> x
+[2, 3, 5, 6]
+>>> x.pop(3)
+6
+>>> x = [2,3,4,5,6]
+>>> x.pop(3)
+5
+>>> x.pop(-3)
+3
+>>> def foo(x, popx, y, popy):
+...     print x
+...     print popx
+...     print y
+...     print popy
+...
+>>> x = [2,3,4,5,6]
+>>> foo (x, x.pop(-3), x, x.pop(3))
+[2, 3, 5]
+4
+[2, 3, 5]
+6
+#python evaluates the arguments to the function from left to right
+
+>>> d = {}
+>>> len(d)
+0
+>>> d['key'] = len(d)
+>>> d
+{'key': 0}
+>>> len(d)
+1
 
