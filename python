@@ -397,6 +397,35 @@ four
 (1002, 3)
 (1003, 'four')
 
+Generator vs. Iterator
+======================
+All generators are iterators but not all iterators are generators.
+Main advantage of generators is that (a) you don't have to calculate the entire iterable ahead of
+time (and thus you can have an infinite iterable, WHILE (b) you can easily create the iterable
+through a function syntax rather than via creating/instantiating a class.
+
+"""Iterators are objects that have an __iter__ and a __next__ (next in Python 2) method.
+Generators provide an easy, built-in way to create instances of Iterators."""
+https://stackoverflow.com/questions/2776829/difference-between-pythons-generators-and-iterators
+
+>>> def get_generator():   
+...     object_state = 1    # this object will maintain internal property/state
+...     while True:
+...             yield object_state      # yields a value every time we call next on the object 
+...             object_state += 1       # this will be executed the next time next is called
+... 
+>>> g = returns_generator()
+>>> type(g)
+<type 'generator'>
+>>> next(g)
+1
+>>> next(g)
+2
+>>> next(g)
+3
+
+
+
 List Comprehensions
 ===================
 
