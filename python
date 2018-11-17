@@ -237,6 +237,10 @@ id(x)
 ref_demo(x)
 id(x)
 
+Also see:
+https://robertheaton.com/2014/02/09/pythons-pass-by-object-reference-as-explained-by-philip-k-dick/
+http://foobarnbaz.com/2012/07/08/understanding-python-variables/
+
 
 What methods are available for an object?
 =========================================
