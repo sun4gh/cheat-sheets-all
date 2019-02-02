@@ -3,3 +3,9 @@ https://www.youtube.com/watch?v=2AFGPdNn4FM
 df[df.somecol >= 200]
   or
 new_df = df[df.somecol >= 200]
+
+
+new_df.shape
+
+#concatenating two dataframes
+all_data = pd.concat([train_df, test_df])
