@@ -1,0 +1,5 @@
+https://www.youtube.com/watch?v=2AFGPdNn4FM
+  for why the following makes sense:
+df[df.somecol >= 200]
+  or
+new_df = df[df.somecol >= 200]
