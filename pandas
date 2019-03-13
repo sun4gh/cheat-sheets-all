@@ -5,6 +5,9 @@ df[df.somecol >= 200]
 new_df = df[df.somecol >= 200]
 
 
+https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf
+
+
 new_df.shape
 
 #concatenating two dataframes
