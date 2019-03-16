@@ -1,3 +1,204 @@
+>>>import pandas as pd
+>>>import numpy as np
+
+# CREATING DATAFRAMES
+
+>>>column_keys_list_values_dict = {  "January" : [ 3, 7,9] , "February" : [2,5,6] }
+
+>>>a_df = pd.DataFrame( column_keys_list_values_dict )
+
+>>> a_df
+   February  January
+0         2        3
+1         5        7
+2         6        9
+
+>>>a_df = pd.DataFrame( column_keys_list_values_dict , index = ["New York", "New Jersey", "Connecticut"] )
+
+>>> a_df
+             February  January
+New York            2        3
+New Jersey          5        7
+Connecticut         6        9
+
+>>> for each in a_df.index:
+...     print each
+... 
+New York
+New Jersey
+Connecticut
+
+>>> for each in a_df["January"]:
+...     print each
+... 
+3
+7
+9
+
+
+>>> type(a_df)
+<class 'pandas.core.frame.DataFrame'>
+>>> type(a_df["January"])
+<class 'pandas.core.series.Series'>
+>>> type(a_df.index)
+<class 'pandas.core.indexes.base.Index'>
+
+>>> a_df.index          # NOT a_df["index"] which would be a column named 'index'
+Index([u'New York', u'New Jersey', u'Connecticut'], dtype='object')
+
+#define a dataframe by rows - notice the default index, and columns
+>>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ])
+>>> b_df
+    0   1
+0  32  34
+1  25  26
+2  38  39
+
+#define by rows and supply the columns when defining
+>>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ], columns=["June", "July"] )
+>>> b_df
+   June  July
+0    32    34
+1    25    26
+2    38    39
+
+#or define by rows and supply columns and index 
+>>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ], columns=["June", "July"], index = a_df.index )
+>>> b_df
+             June  July
+New York       32    34
+New Jersey     25    26
+Connecticut    38    39
+
+#missing values
+>>> b_df = pd.DataFrame( [ [32,34], [25, ], [38,39] ], columns=["June", "July"], index = a_df.index ) 
+>>> b_df
+             June  July
+New York       32  34.0
+New Jersey     25   NaN
+Connecticut    38  39.0
+
+>>> b_df = pd.DataFrame( [ [32,34], [ , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
+  File "<stdin>", line 1
+    b_df = pd.DataFrame( [ [32,34], [ , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
+                                      ^
+SyntaxError: invalid syntax
+
+>>> b_df = pd.DataFrame( [ [32,34], [NaN , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'NaN' is not defined
+>>> b_df = pd.DataFrame( [ [32,34], [np.NaN , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
+>>> b_df
+             June  July
+New York     32.0    34
+New Jersey    NaN    26
+Connecticut  38.0    39 
+
+>>> c_df = pd.DataFrame( { "March" : [np.NAN , np.NAN, 8], "August" : [2,np.NAN ,2] }, index = a_df.index)
+>>> c_df
+             August  March
+New York        2.0    NaN
+New Jersey      NaN    NaN
+Connecticut     2.0    8.0
+
+
+>>> pd.concat( [a_df, c_df, b_df], axis =1)
+             February  January  August  March  June  July
+New York            2        3     2.0    NaN  32.0    34
+New Jersey          5        7     NaN    NaN   NaN    26
+Connecticut         6        9     2.0    8.0  38.0    39
+
+>>> winter_summer = pd.concat( [a_df, c_df, b_df], axis =1)
+>>> type(winter_summer)
+<class 'pandas.core.frame.DataFrame'>
+
+
+#SLICING: ROWS
+
+>>> winter_summer.loc["Connecticut", "June"]      #slicing by label, not a function
+38.0
+>>> winter_summer.iloc[ 0, 1]                     #slicing by integer - 0th row, and 1st column - returns a cell
+3
+>>> winter_summer.iloc[ 0, 1]
+3
+>>> type(winter_summer.iloc[ 0, 1])
+<type 'numpy.int64'>
+>>> winter_summer.iloc[ : , 1:2]                  #clicing by integer ranges - returns a DataFrame
+             January                              #range 1:2 is January only, becuase 0th is Feb, 1st is Jan, etc.
+New York           3
+New Jersey         7
+Connecticut        9
+>>> type(winter_summer.iloc[ : , 1:2])
+<class 'pandas.core.frame.DataFrame'>
+
+
+
+#SLICING: COLUMNS
+
+>>> winter_summer [[ 'January', 'July']]    # a list of columns
+             January  July
+New York           3    34
+New Jersey         7    26
+Connecticut        9    39
+>>> type(winter_summer [[ 'January', 'July']])
+<class 'pandas.core.frame.DataFrame'>
+>>> winter_summer[['January']]              # a list of one column
+             January
+New York           3
+New Jersey         7
+Connecticut        9
+>>> type(winter_summer[['January']])        # slicing by a list of columns, even a single item list, returns a dataframe
+<class 'pandas.core.frame.DataFrame'>
+>>> type(winter_summer['January'])          # a single column, not a list, returns a Series
+<class 'pandas.core.series.Series'>
+
+
+## SLICING BY CONDITION
+
+>>> winter_summer["June"].notna()           #returns a boolean Series
+New York        True
+New Jersey     False
+Connecticut     True
+Name: June, dtype: bool
+>>> type(winter_summer["June"].notna())
+<class 'pandas.core.series.Series'>
+
+>>> winter_summer[winter_summer["June"].notna()]
+             February  January  August  March  June  July
+New York            2        3     2.0    NaN  32.0    34
+Connecticut         6        9     2.0    8.0  38.0    39
+
+>>> winter_summer[  [True, True, False] ]
+            February  January  August  March  June  July
+New York           2        3     2.0    NaN  32.0    34
+New Jersey         5        7     NaN    NaN   NaN    26
+
+>>> winter_summer [  [True, False] ]
+Traceback (most recent call last):
+..
+ValueError: Item wrong length 2 instead of 3.
+
+
+
+
+
+>>> winter_summer.notna()
+             February  January  August  March   June  July
+New York         True     True    True  False   True  True
+New Jersey       True     True   False  False  False  True
+Connecticut      True     True    True   True   True  True
+>>> winter_summer.isna()
+             February  January  August  March   June   July
+New York        False    False   False   True  False  False
+New Jersey      False    False    True   True   True  False
+Connecticut     False    False   False  False  False  False
+
+
+
+
+
+#OTHER SOURCES
 https://www.youtube.com/watch?v=2AFGPdNn4FM
   for why the following makes sense:
 df[df.somecol >= 200]
