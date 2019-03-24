@@ -6,15 +6,13 @@
 >>>column_keys_list_values_dict = {  "January" : [ 3, 7,9] , "February" : [2,5,6] }
 
 >>>a_df = pd.DataFrame( column_keys_list_values_dict )
-
->>> a_df
+>>>a_df
    February  January
 0         2        3
 1         5        7
 2         6        9
 
 >>>a_df = pd.DataFrame( column_keys_list_values_dict , index = ["New York", "New Jersey", "Connecticut"] )
-
 >>> a_df
              February  January
 New York            2        3
@@ -38,15 +36,17 @@ Connecticut
 
 >>> type(a_df)
 <class 'pandas.core.frame.DataFrame'>
+
 >>> type(a_df["January"])
 <class 'pandas.core.series.Series'>
+
 >>> type(a_df.index)
 <class 'pandas.core.indexes.base.Index'>
 
->>> a_df.index          # NOT a_df["index"] which would be a column named 'index'
+>>> a_df.index          # NOT a_df["index"] which would look for a column named 'index'
 Index([u'New York', u'New Jersey', u'Connecticut'], dtype='object')
 
-#define a dataframe by rows - notice the default index, and columns
+#define a dataframe by rows - notice the default index, and columns, assigned by pandas
 >>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ])
 >>> b_df
     0   1
@@ -54,7 +54,7 @@ Index([u'New York', u'New Jersey', u'Connecticut'], dtype='object')
 1  25  26
 2  38  39
 
-#define by rows and supply the columns when defining
+#define by rows and supply the column labels when defining
 >>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ], columns=["June", "July"] )
 >>> b_df
    June  July
@@ -62,7 +62,7 @@ Index([u'New York', u'New Jersey', u'Connecticut'], dtype='object')
 1    25    26
 2    38    39
 
-#or define by rows and supply columns and index 
+#or define by rows and supply column labels and index labels 
 >>> b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ], columns=["June", "July"], index = a_df.index )
 >>> b_df
              June  July
@@ -70,7 +70,7 @@ New York       32    34
 New Jersey     25    26
 Connecticut    38    39
 
-#missing values
+#missing values - avoid ambiguously providing missing values, and instead provide those as np.NaN
 >>> b_df = pd.DataFrame( [ [32,34], [25, ], [38,39] ], columns=["June", "July"], index = a_df.index ) 
 >>> b_df
              June  July
@@ -82,12 +82,13 @@ Connecticut    38  39.0
   File "<stdin>", line 1
     b_df = pd.DataFrame( [ [32,34], [ , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
                                       ^
-SyntaxError: invalid syntax
+                                      SyntaxError: invalid syntax
 
 >>> b_df = pd.DataFrame( [ [32,34], [NaN , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'NaN' is not defined
+
 >>> b_df = pd.DataFrame( [ [32,34], [np.NaN , 26 ], [38,39] ], columns=["June", "July"], index = a_df.index )
 >>> b_df
              June  July
@@ -103,7 +104,7 @@ New Jersey      NaN    NaN
 Connecticut     2.0    8.0
 
 
->>> pd.concat( [a_df, c_df, b_df], axis =1)
+>>> pd.concat( [a_df, c_df, b_df], axis =1)        # axis is horizontal, the default is 0 which is the vertical axis
              February  January  August  March  June  July
 New York            2        3     2.0    NaN  32.0    34
 New Jersey          5        7     NaN    NaN   NaN    26
@@ -114,48 +115,81 @@ Connecticut         6        9     2.0    8.0  38.0    39
 <class 'pandas.core.frame.DataFrame'>
 
 
-#SLICING: ROWS
+#SLICING using unique values
 
+# .loc[] slicing by index label and by column label, getting back a single cell
 >>> winter_summer.loc["Connecticut", "June"]      #slicing by label, not a function
 38.0
+
+# .iloc[] is "Purely integer-location based indexing for selection by position."
 >>> winter_summer.iloc[ 0, 1]                     #slicing by integer - 0th row, and 1st column - returns a cell
 3
->>> winter_summer.iloc[ 0, 1]
-3
+
 >>> type(winter_summer.iloc[ 0, 1])
-<type 'numpy.int64'>
+<type 'numpy.int64'>                              # a cell, but you might get a bigger structure (e.g. Series) if duplicate indices exist 
+
+
+#SLICING: using ranges of index, and/or columns
+
 >>> winter_summer.iloc[ : , 1:2]                  #clicing by integer ranges - returns a DataFrame
              January                              #range 1:2 is January only, becuase 0th is Feb, 1st is Jan, etc.
 New York           3
 New Jersey         7
 Connecticut        9
+
 >>> type(winter_summer.iloc[ : , 1:2])
 <class 'pandas.core.frame.DataFrame'>
 
+>>> type(winter_summer.iloc[:, 1:1])               #pass in a range of rows, range of columns, even if it amounts to 1
+<class 'pandas.core.frame.DataFrame'>              #you get a dataframe
+
+>>> type(winter_summer.iloc[:, 1])                 #pass in a range of rows, single column, not a range,
+<class 'pandas.core.series.Series'>                #you get back a Series
 
 
-#SLICING: COLUMNS
+#SLICING: get entire COLUMNS as Dataframes or as Series
 
->>> winter_summer [[ 'January', 'July']]    # a list of columns
+>>> winter_summer [[ 'January', 'July']]    # provide a list of columns, receive a dataframe
              January  July
 New York           3    34
 New Jersey         7    26
 Connecticut        9    39
+
 >>> type(winter_summer [[ 'January', 'July']])
 <class 'pandas.core.frame.DataFrame'>
->>> winter_summer[['January']]              # a list of one column
+
+>>> winter_summer[['January']]              # likewise, for a list of one column, you still receive a dataframe 
              January
 New York           3
 New Jersey         7
 Connecticut        9
+
 >>> type(winter_summer[['January']])        # slicing by a list of columns, even a single item list, returns a dataframe
 <class 'pandas.core.frame.DataFrame'>
->>> type(winter_summer['January'])          # a single column, not a list, returns a Series
+
+>>> type(winter_summer['January'])          # clice by a single column, not a list, returns a Series, not dataframe
 <class 'pandas.core.series.Series'>
 
 
-## SLICING BY CONDITION
+## SLICING BY BOOLEAN
 
+>>> winter_summer[  [True, True, False] ]   # pass a list of booleans equal in size to the index
+                                            # to filter out all the columns coresponding to the False
+            February  January  August  March  June  July
+New York           2        3     2.0    NaN  32.0    34
+New Jersey         5        7     NaN    NaN   NaN    26
+
+#alternatively : pass in a condition that results in a boolean series, even a complex boolean logic
+#to be added here later ***
+
+>>> winter_summer [  [True, False] ]        # won't work to pass in a list of booleans unequal to size of index
+Traceback (most recent call last):
+..
+ValueError: Item wrong length 2 instead of 3.
+
+## GETTING A BOOLEAN SERIES using methods
+# np.NAN comparisons are tricky, the method .notna() makes it easier
+# it means if it's not np.NAN
 >>> winter_summer["June"].notna()           #returns a boolean Series
 New York        True
 New Jersey     False
@@ -164,24 +198,16 @@ Name: June, dtype: bool
 >>> type(winter_summer["June"].notna())
 <class 'pandas.core.series.Series'>
 
+## GETTING A BOOLEAN SERIES using a CONDITION
+#*** to be filled here... using a_df[ "column'] == 3 etc.
+
+# Passing a returned boolean series to slicing by T/F index
 >>> winter_summer[winter_summer["June"].notna()]
              February  January  August  March  June  July
 New York            2        3     2.0    NaN  32.0    34
 Connecticut         6        9     2.0    8.0  38.0    39
 
->>> winter_summer[  [True, True, False] ]
-            February  January  August  March  June  July
-New York           2        3     2.0    NaN  32.0    34
-New Jersey         5        7     NaN    NaN   NaN    26
-
->>> winter_summer [  [True, False] ]
-Traceback (most recent call last):
-..
-ValueError: Item wrong length 2 instead of 3.
-
-
-
-
+# SLICING DATAFRAMES using the method on the entire dataframe
 
 >>> winter_summer.notna()
              February  January  August  March   June  July
