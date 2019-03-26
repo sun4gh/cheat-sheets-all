@@ -252,6 +252,74 @@ drinks_df.describe()                         #gives basic statistics for numeric
 drinks_df.describe(include = ['object'])     # gives basic counts for object type columns
 
 
+# DATA TYPES & CONVERSIONS
+
+>>> drinks_df.dtypes
+country                          object         #same as "string"
+beer_servings                     int64         #integer
+spirit_servings                   int64
+wine_servings                     int64
+total_litres_of_pure_alcohol    float64
+continent                        object
+dtype: object
+
+>>> drinks_df["beer_servings"] = drinks_df["beer_servings"].astype('float')
+#remember to assign it or to use inplace = True 
+#seems to work for 'float' and float
+>>> drinks_df.dtypes
+country                          object
+beer_servings                   float64         #now it's floats
+spirit_servings                   int64
+wine_servings                     int64
+total_litres_of_pure_alcohol    float64
+continent                        object
+dtype: object
+
+>>> drinks_df["beer_servings"] = drinks_df["beer_servings"].astype('int', inplace=True)
+#works for 'int' and int
+>>> drinks_df.dtypes
+country                          object
+beer_servings                     int64         #now it is integers ahgain
+spirit_servings                   int64
+wine_servings                     int64
+total_litres_of_pure_alcohol    float64
+continent                        object
+dtype: object
+
+>>> del drinks_df       #start fresh
+>>> drinks_df = pd.read_csv(DRINKS_URL, index_col = 0, dtype = { 'beer_servings' : float})
+#notice: it's not index = "country", or set_index = "country", 
+#notice: it's not dtypes as in drinks_df.dtypes; it is dtype
+#notice: float or 'float'
+>>> drinks_df.head()
+             beer_servings  spirit_servings  wine_servings  total_litres_of_pure_alcohol continent
+country                                                                                           
+Afghanistan            0.0                0              0                           0.0      Asia
+Albania               89.0              132             54                           4.9    Europe
+Algeria               25.0                0             14                           0.7    Africa
+Andorra              245.0              138            312                          12.4    Europe
+Angola               217.0               57             45                           5.9    Africa
+
+
+>>> chipotle_df = pd.read_table("http://bit.ly/chiporders")
+>>> chipotle_df.head()
+   order_id  quantity    ...                                     choice_description item_price
+0         1         1    ...                                                    NaN     $2.39 
+1         1         1    ...                                           [Clementine]     $3.39 
+2         1         1    ...                                                [Apple]     $3.39 
+3         1         1    ...                                                    NaN     $2.39 
+4         2         2    ...      [Tomatillo-Red Chili Salsa (Hot), [Black Beans...    $16.98 
+
+>>> chipotle_df["item_price"].str.lstrip("$").astype(float).mean()
+7.464335785374397
+#for that column use the 'StringMethods' object, left-strip the $, convert to type float, and take the mean.
+#notice float but works with 'float'
+
+chipotle_df["item_name"].str.contains("Chicken")
+#this works, it produces a long series of True/False
+chipotle_df["item_name"].str.contains("Chicken").astype(int)
+#same but now it is 0,1
+
 
 
 
@@ -261,16 +329,11 @@ https://www.youtube.com/watch?v=2AFGPdNn4FM
 df[df.somecol >= 200]
   or
 new_df = df[df.somecol >= 200]
-
-
-
-
+   
 https://github.com/pandas-dev/pandas/blob/master/doc/cheatsheet/Pandas_Cheat_Sheet.pdf
 consider
 https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience.pdf
 https://medium.com/dunder-data/minimally-sufficient-pandas-cheat-sheet-34f3a6888c36
+https://www.machinelearningplus.com/python/101-pandas-exercises-python/
 
-new_df.shape
 
-#concatenating two dataframes
-all_data = pd.concat([train_df, test_df])
