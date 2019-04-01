@@ -115,9 +115,19 @@ Connecticut         6        9     2.0    8.0  38.0    39
 <class 'pandas.core.frame.DataFrame'>
 
 
-#SLICING using unique values
+#SLICING - via integer location - obtaining a cell by using single values for index and column
+
+      Here's what's happened above (cut and paste into interpereter, if needed)`
+import pandas as pd
+import numpy as np
+column_keys_list_values_dict = {  "January" : [ 3, 7,9] , "February" : [2,5,6] }
+a_df = pd.DataFrame( column_keys_list_values_dict , index = ["New York", "New Jersey", "Connecticut"] )
+b_df = pd.DataFrame( [ [32,34], [25, 26], [38,39] ], columns=["June", "July"], index = a_df.index )
+c_df = pd.DataFrame( { "March" : [np.NAN , np.NAN, 8], "August" : [2,np.NAN ,2] }, index = a_df.index)
+winter_summer = pd.concat( [a_df, c_df, b_df], axis =1)
 
 # .loc[] slicing by index label and by column label, getting back a single cell
+
 >>> winter_summer.loc["Connecticut", "June"]      #slicing by label, not a function
 38.0
 
@@ -126,12 +136,12 @@ Connecticut         6        9     2.0    8.0  38.0    39
 3
 
 >>> type(winter_summer.iloc[ 0, 1])
-<type 'numpy.int64'>                              # a cell, but you might get a bigger structure (e.g. Series) if duplicate indices exist 
+<type 'numpy.int64'>                              # a cell
 
 
-#SLICING: using ranges of index, and/or columns
+#SLICING - via integer location -  using ranges of index, and/or columns
 
->>> winter_summer.iloc[ : , 1:2]                  #clicing by integer ranges - returns a DataFrame
+>>> winter_summer.iloc[ : , 1:2]                  #slicing by integer ranges - returns a DataFrame
              January                              #range 1:2 is January only, becuase 0th is Feb, 1st is Jan, etc.
 New York           3
 New Jersey         7
@@ -149,7 +159,16 @@ Connecticut        9
 
 #SLICING: get entire COLUMNS as Dataframes or as Series
 
->>> winter_summer [[ 'January', 'July']]    # provide a list of columns, receive a dataframe
+>>> extreme_months_list = [ 'February', 'August']
+>>> extreme_months_list
+['February', 'August']
+>>> winter_summer[ extreme_months_list ]            # use the slicing format (square brackets), and pass it a list
+             February  August
+New York            2     2.0
+New Jersey          5     NaN
+Connecticut         6     2.0
+
+>>> winter_summer [[ 'January', 'July']]    # or make the list on the go
              January  July
 New York           3    34
 New Jersey         7    26
@@ -158,7 +177,7 @@ Connecticut        9    39
 >>> type(winter_summer [[ 'January', 'July']])
 <class 'pandas.core.frame.DataFrame'>
 
->>> winter_summer[['January']]              # likewise, for a list of one column, you still receive a dataframe 
+>>> winter_summer[['January']]              # likewise, for a list of only one column, you still receive a dataframe 
              January
 New York           3
 New Jersey         7
@@ -171,7 +190,7 @@ Connecticut        9
 <class 'pandas.core.series.Series'>
 
 
-## SLICING BY BOOLEAN
+## SLICING BY BOOLEAN Series... to filter ROWS
 
 >>> winter_summer[  [True, True, False] ]   # pass a list of booleans equal in size to the index
                                             # to filter out all the columns coresponding to the False
@@ -179,13 +198,27 @@ Connecticut        9
 New York           2        3     2.0    NaN  32.0    34
 New Jersey         5        7     NaN    NaN   NaN    26
 
-#alternatively : pass in a condition that results in a boolean series, even a complex boolean logic
-#to be added here later ***
+>>> just_jersey_list = [False, True, False]
+>>> just_jersey_list
+[False, True, False]
+>>> winter_summer[ just_jersey_list ]
+            February  January  August  March  June  July
+New Jersey         5        7     NaN    NaN    25    26
 
->>> winter_summer [  [True, False] ]        # won't work to pass in a list of booleans unequal to size of index
+>>> winter_summer [ extreme_months_list] [ just_jersey_list ]     #chaining subsetting
+            February  August
+New Jersey         5     NaN
+
+
+
+>>> winter_summer [  [True, False] ]        # try to pass a list of booleans unequal to size of index
 Traceback (most recent call last):
 ..
 ValueError: Item wrong length 2 instead of 3.
+
+
+#alternatively : pass in a condition that results in a boolean series, even a complex boolean logic
+#to be added here later ***
 
 ## GETTING A BOOLEAN SERIES using methods
 # np.NAN comparisons are tricky, the method .notna() makes it easier
@@ -198,16 +231,19 @@ Name: June, dtype: bool
 >>> type(winter_summer["June"].notna())
 <class 'pandas.core.series.Series'>
 
+
 ## GETTING A BOOLEAN SERIES using a CONDITION
-#*** to be filled here... using a_df[ "column'] == 3 etc.
 
 # Passing a returned boolean series to slicing by T/F index
->>> winter_summer[winter_summer["June"].notna()]
+>>> winter_summer[ winter_summer["June"].notna() ]
              February  January  August  March  June  July
 New York            2        3     2.0    NaN  32.0    34
 Connecticut         6        9     2.0    8.0  38.0    39
 
-# SLICING DATAFRAMES using the method on the entire dataframe
+#*** to be filled here... using a_df[ "column'] == 3 etc.
+
+
+# BOOLEAN DATAFRAMES using the method on the entire dataframe
 
 >>> winter_summer.notna()
              February  January  August  March   June  July
@@ -229,6 +265,7 @@ DRINKS_URL = "https://raw.githubusercontent.com/justmarkham/pandas-videos/master
 #Data School 
 drinks_df = pd.read_csv(DRINKS_URL)
 
+
 #REINDEXING THE ROWS USING A COLUMN
 
 #set the index to be one of the columns
@@ -248,12 +285,13 @@ drinks_df = pd.read_csv(DRINKS_URL)
 drinks_df.index = drinks_df["country"]
 #this doesn't automatically drop the column
 
+
 #BASIC METRICS / EXPLORING
-drinks_df.describe()                         #gives basic statistics for numerical columns
+drinks_df.describe()                         # gives basic statistics for numerical columns
 drinks_df.describe(include = ['object'])     # gives basic counts for object type columns
 
 
-# DATA TYPES & CONVERSIONS
+# DATA TYPES & TYPE CONVERSIONS
 
 >>> drinks_df.dtypes
 country                          object         #same as "string"
@@ -264,7 +302,13 @@ total_litres_of_pure_alcohol    float64
 continent                        object
 dtype: object
 
->>> drinks_df["beer_servings"] = drinks_df["beer_servings"].astype('float')
+>>> drinks_df["beer_servings"].dtypes           # don't you love this? both dtype and dtypes works here
+dtype('float64')
+>>> drinks_df["beer_servings"].dtype            # but not in other places in pandas like 
+dtype('float64')
+
+
+>>> drinks_df["beer_servings"] = drinks_df["beer_servings"].astype('float')        # conversion
 #remember to assign it or to use inplace = True 
 #seems to work for 'float' and float
 >>> drinks_df.dtypes
@@ -287,10 +331,10 @@ total_litres_of_pure_alcohol    float64
 continent                        object
 dtype: object
 
->>> del drinks_df       #start fresh
+>>> del drinks_df       #start fresh, to tell it which column to use for index, and conversions
 >>> drinks_df = pd.read_csv(DRINKS_URL, index_col = 0, dtype = { 'beer_servings' : float})
 #notice: it's not index = "country", or set_index = "country", 
-#notice: it's not dtypes as in drinks_df.dtypes; it is dtype
+#notice: it's not dtypes as in drinks_df.dtypes; it is dtype <- confirmed
 #notice: float or 'float'
 >>> drinks_df.head()
              beer_servings  spirit_servings  wine_servings  total_litres_of_pure_alcohol continent
