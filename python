@@ -240,6 +240,7 @@ id(x)
 Also see:
 https://robertheaton.com/2014/02/09/pythons-pass-by-object-reference-as-explained-by-philip-k-dick/
 http://foobarnbaz.com/2012/07/08/understanding-python-variables/
+https://www.quora.com/What-is-the-pointer-in-Python-Does-a-pointer-exist-in-Python
 
 
 What methods are available for an object?
