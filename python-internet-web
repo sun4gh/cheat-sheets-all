@@ -1,0 +1,45 @@
+# simplest
+import webbrowser as wb
+wb.open("http://www.github.com")
+
+# minimal with specific browser
+import webbrowser as wb
+firefox = wb.get('firefox')
+firefox.open("http://www.github.com")
+
+#using multiple browsers and choosing same window, new window, and same window new tab
+import webbrowser as wb
+import time
+a_URL = "http://www.github.com"
+
+safari = wb.get('safari')
+safari.custom_name = 'safari'
+firefox = wb.get('firefox')
+firefox.custom_name = 'firefox'
+chrome = wb.get('chrome')
+chrome.custom_name = 'chrome'
+
+for the_browser in [safari, firefox, chrome]:
+	print  "two open_new in a row, for browser:" , the_browser.custom_name
+	the_browser.open_new(a_URL)
+	time.sleep(2)
+	the_browser.open_new(a_URL)
+	time.sleep(7)
+  
+	print  "one new_tab"
+	print  "two open_new in a row"
+	the_browser.open_new_tab(a_URL)
+	time.sleep(2)
+	the_browser.open_new_tab(a_URL)
+	time.sleep(7)
+  
+	#Display url using the browser handled by this controller. 
+	#If new is 1, a new browser window is opened if possible. 
+	#If new is 2, a new browser page (“tab”) is opened if possible.
+	#see 20.1.1 at https://docs.python.org/2/library/webbrowser.html
+	print "now with open 1,2,0"
+	the_browser.open(a_URL, 0)
+	time.sleep(2)
+	the_browser.open(a_URL, 1)
+	time.sleep(2)
+	the_browser.open(a_URL, 2)
