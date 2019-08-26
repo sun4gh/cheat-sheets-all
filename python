@@ -462,19 +462,135 @@ https://jakevdp.github.io/PythonDataScienceHandbook/01.02-shell-keyboard-shortcu
 
 Evaluation Order
 ================
+
+Three Interesting Questions
+1. Order of Assignments When There Are Multiple Assignments on One Line
+2. Order of Expression Evaluation When There Are Multiple Assignments on One Line
+3. Order of Expression Evaluation When Passing Parameters to a Function
+
+1. Assignment Order When There Are Multiple Assignments
+
+>>> a = 3
+>>> b = -3
+>>> a, b
+(3, -3)
+
+>>> a, b = b, a
+>>> a,b
+(-3, 3)
+
+a. Even though these are immutable objects, only these two objects are needed, therefore python won't create new objects.
+Using id(a), and id(b) we can confirm it's the same two referenced objects after the transformation.
+b. Python must be creating copies of the object references (note: I didn't say the referenced objects) before 
+making any assignments. Why? In case of Left-To-Right assignment, if name:'a' gets rebound to object referenced 
+by name:'b', which is the -3), then a --> -3, and b --> -3, so when name:'b' gets rebound to object referenced
+by name:'a', b should also be referencing -3. The answer would have been (-3, -3). Similarly for Right-To-Left assignment, 
+except in that case the answer would be (3,3).
+
+>>> a = 3
+>>> b = -3
+>>> a, b = -b, a
+>>> a,b
+(3, 3)
+>>> 
+>>> a = 3
+>>> b = -3
+>>> b, a = a, -b
+>>> a,b
+(3, 3)
+In both cases, the transformations intended are identical: a is to become -(-3) and b is to become 3.
+Python acts as if it's doing these transformations in parallel, or most likely holds the object references
+as copies and works L2R, rather than dereference each pointer as each pointer is needed.
+
+2. Order of Expression Evaluation When There Are Multiple Assignments
+
+>>> a = [2, 3, 'second pop', 'first pop']
+
+Three assingments that all require evaluation.
+A left and a right that operate on list a, and a middle one that totally changes a.
+
+>>> left, a, right = a.pop(), ['so a is now pointing '].append('elsewhere!'), a.pop()
+>>> left
+'first pop'
+>>> a
+['so a is now pointing elsewhere ', 'so a is now pointing elsewhere ']
+>>> right
+'second pop'
+
+So even though there are two a.pop() on the RHS, the rightmost a.pop() results in 'second pop' because
+by then the list 'a' had already been popped once and the 'first pop' was no longer there.
+
+Note that inbetween these assignments the list got re-bound to a new list, which also needed to be
+evaluated. This assignment, though it appears in between left and right assignments, did not happen before
+the other evaluations completed.
+
+Again, python copies object references and works with those.
+- we know it's references, because in the case of mutable objects like list 'a', the order of operations matters
+- we know it's copies, because the reassignment of 'a' to a new list did not affect either of the two pop(),
+which would have been affected if R2L, or L2R.
+
+This is important: if you are mutating a mutable object, the order of evaluation on the RHS is L2R (left to right).
+You can avoid surprises by not having multiple assignments on a single line.
+
 "So evaluation of the right-hand side is left-to-right. But the RHS is always evaluated before binding anything to the LHS"
 https://stackoverflow.com/questions/29753335/is-python-assignment-strictly-evaluated-right-to-left
 
+N. Are bindings determined only as needed in the process of L2R?
+
 >>> def foo(x):
+...     print("foo: received", x, "about to return ", x+3)
 ...     return x+3
-... 
+
 >>> foo(15)
+foo: received 15 about to return  18
 18
->>> a, b, c = 3, foo(a), foo(b)
+
+>>> a, b, c, d  = 3, foo(a), foo(b), foo(7)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'a' is not defined
 
+>>> d
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'd' is not defined
+
+If python evaluated any expressions before checking _all_ bindings, it would have either 
+bound a to 3 (if executing L2R), or bound d to 10 (along with some printing) if R2L.
+
+Also it identifed 'a' as not defined, not 'b' as not defined, consistent with checking the 
+bindings L2R.
+
+Therefore, python checks for all bindings to be valid, THEN evaluates expressions on the RHS, 
+and FINALLY, rebinds names on the LHS.
+
+In fact, once a is properly bound, then 'b' becomes the problem, while still not a single 
+print statement, and not a single assignment . If b had been assigned the value of foo(a), then
+b would have been 0, not 'not defined'.
+
+>>> a = -3
+>>> a, b, c, d = 3, foo(a), foo(b), foo(7)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'b' is not defined
+
+
+>>> b = a
+>>> a, b
+(-3, -3)
+>>> a, b, c, d = 3, foo(a), foo(b), foo(7)
+foo: got -3 about to return  0
+foo: got -3 about to return  0
+foo: got 7 about to return  10
+
+(confirms that even when all bindings exist, execution and assignment is left to right.
+(at least for immutable objects, python first checks the bindings on the RHS in a L2R order)
+
+
+Python Evaluation (of arguments in a function call)
+3. Order of Expression Evaluation When Passing Parameters to a Function
+
+#the pop-from-back-first approach
 >>> x = [2,3,4,5,6]
 >>> x.pop(-3)
 4
@@ -482,11 +598,23 @@ NameError: name 'a' is not defined
 [2, 3, 5, 6]
 >>> x.pop(3)
 6
+>>> x
+[2, 3, 5]
+
+#the pop-from-front-first approach
 >>> x = [2,3,4,5,6]
 >>> x.pop(3)
 5
+>>> x
+[2, 3, 4, 6]
 >>> x.pop(-3)
 3
+>>> x
+[2, 4, 6]
+
+(so this mutable list ends up different depending upon whether you pop-from-back-first 
+or pop-from-front-first, even though the set of all operations remains the same)
+
 >>> def foo(x, popx, y, popy):
 ...     print x
 ...     print popx
@@ -499,6 +627,14 @@ NameError: name 'a' is not defined
 4
 [2, 3, 5]
 6
+
+#look at the value for x (the list): this tells us all the parameters were executed, before any 
+#were lined up to be passed into foo (otherwise, we would have gotten [2,3,4,5,6] at least for the first print
+
+# also, the final value of x, as well as the popped 4 and 6, are consistent
+# with the pop-from-front-first case, not the pop-from-back-first case
+# which confirms that evaluation is L2R
+
 #python evaluates the arguments to the function from left to right
 
 >>> d = {}
