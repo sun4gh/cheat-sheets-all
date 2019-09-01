@@ -294,15 +294,23 @@ You need a list of comma separated emails and you have a copy of addresses from 
 You need to make a date-stamped backup of a file before using it
 ================================================================
 
->>> targetfile = "test-tes.docx"
->>> 
->>> import datetime
->>> from pathlib import Path
->>> 
->>> this_moment = datetime.datetime.now()
->>> from pathlib import Path
->>> filepath = Path (targetfile)
->>> filepath.rename(filepath.with_suffix("."+str(this_moment).replace(" ", "_").replace(":","-")))
+import datetime
+from pathlib import Path
+
+ARCHIVE_DIR  = "Test-Backup"
+original_file_name = "test-tes.docx"
+
+filepath = Path.cwd()
+
+# to move the file
+(filepath / original_file_name ).rename(filepath / ARCHIVE_DIR /original_file_name)
+
+# OR, to move the file and append a the timestamp
+this_moment = datetime.datetime.now()
+new_file_name = original_file_name + "__"+str(this_moment).replace(" ", "_").replace(":", "-")
+(filepath / original_file ).rename(filepath / ARCHIVE_DIR / new_file_name )
+
+
 
 Managing Python Packages
 ========================
