@@ -263,6 +263,8 @@ for i in range(readline.get_current_history_length()):
 
 or (1 liner)
 import readline; print '\n'.join([str(readline.get_history_item(i)) for i in range(readline.get_current_history_length())])
+p3.7:
+import readline; print ('\n'.join([str(readline.get_history_item(i)) for i in range(readline.get_current_history_length())]))
 https://stackoverflow.com/questions/6558765/how-do-you-see-the-entire-command-history-in-interactive-python
 
 
@@ -288,6 +290,19 @@ You need a list of comma separated emails and you have a copy of addresses from 
 >>>b = a.split(";")
 >>>c = ' , '.join([  b[i][ b[i].find("<")+1 : b[i].find(">") ] for i in range(len(b))   ])
 
+
+You need to make a date-stamped backup of a file before using it
+================================================================
+
+>>> targetfile = "test-tes.docx"
+>>> 
+>>> import datetime
+>>> from pathlib import Path
+>>> 
+>>> this_moment = datetime.datetime.now()
+>>> from pathlib import Path
+>>> filepath = Path (targetfile)
+>>> filepath.rename(filepath.with_suffix("."+str(this_moment).replace(" ", "_").replace(":","-")))
 
 Managing Python Packages
 ========================
