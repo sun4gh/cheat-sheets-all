@@ -114,6 +114,40 @@ Connecticut         6        9     2.0    8.0  38.0    39
 >>> type(winter_summer)
 <class 'pandas.core.frame.DataFrame'>
 
+#ADD ONE MORE ROW
+#use loc for one more row
+#you can use append and concat, but you have to first create a dataframe out of that, 
+#then append or concat, and both produce a new object instead of modifying the existing
+#object. 
+>>> winter_summer.loc["California"] = [ 5,4,3.0,2.0,1,0]
+>>> winter_summer
+             January  February  March  August  June  July
+New York         3.0       2.0    NaN     2.0  32.0  34.0
+New Jersey       7.0       5.0    NaN     NaN  25.0  26.0
+Connecticut      9.0       6.0    8.0     2.0  38.0  39.0
+California       5.0       4.0    3.0     2.0   1.0   0.0
+
+
+#DELETE (drop) ONE ROW
+#the below works with unique values
+#returns a new object, so need to reassign
+>>> winter_summer.drop( [ "California" ], axis = 0 )
+             January  February  March  August  June  July
+New York         3.0       2.0    NaN     2.0  32.0  34.0
+New Jersey       7.0       5.0    NaN     NaN  25.0  26.0
+Connecticut      9.0       6.0    8.0     2.0  38.0  39.0
+>>> winter_summer
+             January  February  March  August  June  July
+New York         3.0       2.0    NaN     2.0  32.0  34.0
+New Jersey       7.0       5.0    NaN     NaN  25.0  26.0
+Connecticut      9.0       6.0    8.0     2.0  38.0  39.0
+California       5.0       4.0    3.0     2.0   1.0   0.0
+>>> winter_summer = winter_summer.drop( [ "California" ], axis = 0 )
+>>> winter_summer
+             January  February  March  August  June  July
+New York         3.0       2.0    NaN     2.0  32.0  34.0
+New Jersey       7.0       5.0    NaN     NaN  25.0  26.0
+Connecticut      9.0       6.0    8.0     2.0  38.0  39.0
 
 #SLICING - via integer location - obtaining a cell by using single values for index and column
 
