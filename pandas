@@ -302,6 +302,9 @@ drinks_df = pd.read_csv(DRINKS_URL)
 
 #REINDEXING THE ROWS USING A COLUMN
 
+#considering using "country" as the index? want to know if there are duplicatED values
+>>> drinks_df["country"].duplicated(keep = 'first').any()
+
 #set the index to be one of the columns
 drinks_df.set_index("country", inplace = True)
 >>> drinks_df.index
@@ -312,17 +315,40 @@ Index([u'Afghanistan', u'Albania', u'Algeria', u'Andorra', u'Angola',
        u'Tanzania', u'USA', u'Uruguay', u'Uzbekistan', u'Vanuatu',
        u'Venezuela', u'Vietnam', u'Yemen', u'Zambia', u'Zimbabwe'],
       dtype='object', name=u'country', length=193)
+#and it drops the column "country" in the process
 
 or 
 
-drinks_df = pd.read_csv(DRINKS_URL)
-drinks_df.index = drinks_df["country"]
+>>> drinks_df = pd.read_csv(DRINKS_URL)
+>>> drinks_df.index = drinks_df["country"]
 #this doesn't automatically drop the column
 
 
 #BASIC METRICS / EXPLORING
+
 drinks_df.describe()                         # gives basic statistics for numerical columns
+
 drinks_df.describe(include = ['object'])     # gives basic counts for object type columns
+
+#don't look for duplicates in a series, look for duplicatED VALUES
+>>> drinks_df["continent"].duplicated( keep = 'first')
+#first occurence of any value will be False, other values will be True
+>>> drinks_df["continent"].duplicated().any()#returns True if there is even a single duplicated value
+True
+>>> drinks_df["continent"].nunique()
+6
+>>> drinks_df.nunique()
+country                         193
+beer_servings                   130
+spirit_servings                 109
+wine_servings                    79
+total_litres_of_pure_alcohol     90
+continent                         6
+dtype: int64
+>>> drinks_df["continent"].duplicated(keep = 'first').sum()
+187
+#works with index also
+drinks_df.index.duplicated().any()
 
 
 # DATA TYPES & TYPE CONVERSIONS
