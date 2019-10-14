@@ -311,6 +311,13 @@ new_file_name = original_file_name + "__"+str(this_moment).replace(" ", "_").rep
 (filepath / original_file ).rename(filepath / ARCHIVE_DIR / new_file_name )
 
 
+You need a string that represents now but only down to the minute
+=================================================================
+>>> from datetime import datetime
+>>> now = datetime.now()
+>>> print ( str(now.replace (microsecond = 0, second = 0)))
+2019-10-13 21:32:00
+
 
 Managing Python Packages
 ========================
