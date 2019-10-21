@@ -2,6 +2,46 @@ Resources
 =========
 http://www.diveintopython.net
 
+Importing
+=========
+
+#some_script.py
+def add_two ( x, y):
+	return x+y
+print ( add_two (8, 12) )
+#end of some_script.py
+
+$ python
+>>> import some_script # omit the "py", it's being treated as a module, not a filename; this will run the script
+20
+>>> some_script.add_two(13,22)
+35
+>>> add_two(13,22)    $ but you have to fully qualify any names in that script, as done correctly above
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'add_two' is not defined
+
+$ python
+>>> from some_script import add_two
+20
+>>> add_two
+<function add_two at 0x10ba63950>
+>>> add_two(23,23)
+46
+
+$ python
+>>> from some_script import add_two as add2
+20
+>>> add_two (12,23)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'add_two' is not defined
+>>> add2 (12,23)
+35
+
+
+
+
 Reversing a list in place or in new list
 ========================================
 >>> L =[ "one", 2, "three"]
@@ -285,7 +325,7 @@ https://stackoverflow.com/questions/1549801/what-are-the-differences-between-typ
 You need a list of comma separated emails and you have a copy of addresses from Outlook
 =======================================================================================
 # copy from outlook will be semi-colon separated string in this format: first last <first.last@company.com> ; etc.
->>>a = raw_input("Paste the copy from Outlook here: ") 
+>>>a = input("Paste the copy from Outlook here: ") 
 
 >>>b = a.split(";")
 >>>c = ' , '.join([  b[i][ b[i].find("<")+1 : b[i].find(">") ] for i in range(len(b))   ])
