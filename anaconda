@@ -1,0 +1,12 @@
+CONDA 4.6 CHEAT SHEET: https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html
+
+Where are my environments stored?
+$ conda info --envs
+# conda environments:
+#
+base                  *  /anaconda3
+newenv                   /anaconda3/envs/newenv
+
+
+Other Resources:
+https://docs.anaconda.com/anaconda/user-guide/getting-started/
