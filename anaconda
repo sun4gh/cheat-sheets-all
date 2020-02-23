@@ -1,12 +1,38 @@
 CONDA 4.6 CHEAT SHEET: https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html
 
-Where are my environments stored?
+UPDATING CONDA
+$ conda update -n base -c defaults conda
+
+UPDATING ALL
+
+
+WHERE ANACONDA STORES ENV?
 $ conda info --envs
 # conda environments:
 #
 base                  *  /anaconda3
 newenv                   /anaconda3/envs/newenv
 
+WORKING WITH ENVs YOU ALREADY HAVE
 
-Other Resources:
+To activate in a terminal session:
+$ conda activate the_env
+To see the packages of the current env (and their version)  :
+$ conda list
+
+
+INSTALL PACKAGE:
+- do you need to clone a current env first so you can work in a new env?
+- in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
+
+Option:
+In terminal activate the environment you want to use.
+
+Search for the package, e.g. librosa:
+$ conda search librosa
+if that fails, user top search field in anaconda.org to find the pacakage, then look at the instructions on that page, e.g.
+$ conda install -c conda-forge librosa 
+
+OTHER RESOURCES:
 https://docs.anaconda.com/anaconda/user-guide/getting-started/
+https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html
