@@ -3,9 +3,6 @@ CONDA 4.6 CHEAT SHEET: https://conda.io/projects/conda/en/latest/user-guide/chea
 UPDATING CONDA
 $ conda update -n base -c defaults conda
 
-UPDATING ALL
-
-
 WHERE ANACONDA STORES ENV?
 $ conda info --envs
 # conda environments:
@@ -20,8 +17,10 @@ $ conda activate the_env
 To see the packages of the current env (and their version)  :
 $ conda list
 
+Update ALL to most-recent-but-compatible version:
+$ conda update --all
 
-INSTALL PACKAGE:
+INSTALL SPECIFIC PACKAGE:
 - do you need to clone a current env first so you can work in a new env?
 - in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
 
