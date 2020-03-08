@@ -1,6 +1,6 @@
 KEY CSOUND COMMAND LINE FLAGS
 csound (no flags)	<-- lists 0dBFS level, csound version etc, all flags
---help	print long usage options
+--help	print long usage options (--help vs. -help)
 --version	print version details
 -I	I-time only orch run
 -A	create an AIFF format output soundfile
