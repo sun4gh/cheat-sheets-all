@@ -1,0 +1,76 @@
+KEY CSOUND COMMAND LINE FLAGS
+csound (no flags)	<-- lists 0dBFS level, csound version etc, all flags
+--help	print long usage options
+--version	print version details
+-I	I-time only orch run
+-A	create an AIFF format output soundfile
+-W	create a WAV format output soundfile
+-f	float sound samples
+-N	notify (ring the bell) when score or miditrack is done
+-v	verbose orch translation
+-z	List opcodes in this version
+-z 					<-- list opcodes for this version of csound
+--format=type 		<-- Set the audio file output format to one of the formats available in libsndfile. 
+-+skip_seconds=<float> (see below)
+
+Perform from a specific moment onward:
+-+skip_seconds=<float>, min: 0
+	Start score playback at the specified time, skipping earlier events
+$ csound -+skip_seconds=130.2 some.orc some.sco
+
+Using 0dBFS (instead of amplitude)
+-----------
+; Set the 0dbfs to 1... this tells csound that, for whichever file type it is outputting (e.g 16bit, or 24bit) 
+; the value 1.0 will be the value at which clipping occurs.  For 16bit, this will be 32767, which is 
+; the default value, for backward compatibility
+
+0dbfs	=	1
+
+			; orc  instr 1  ; from linear amplitude (0-1 range)
+		print	p4
+a1		oscil p4, 440, 1
+		outs a1, a1
+
+			; orc   instr 2  ; from linear amplitude (0-32767 range)
+iamp	=	p4 / 32767		; notice the division by 0
+		print iamp
+a1 		oscil iamp, 440, 1
+		outs a1, a1
+
+			; orc instr 3  ; from dB FS
+iamp 	=	ampdbfs(p4)
+		print iamp
+a1		oscil iamp, 440, 1
+		outs a1, a1
+
+; Table #1, a sine wave.
+f 1 0 16384 10 1
+
+i 1 0 1   1
+i 1 + 1   0.5
+i 1 + 1   0.1
+s
+i 2 0 1   32767
+i 2 + 1   [32767/2]
+i 2 + 1   [3276.7]
+s
+i 3 0 1   0
+i 3 + 1   -6
+i 3 + 1   -20
+e
+
+
+EXPLORE :
+--syntax-check-only <-- csound command parameters
+import CsoundAC <-- using csound within python
+using csound as VST 
+using VST within csound: http://www.csounds.com/manual/html/vst4cs.html
+
+RESOURCES: Manuals
+------------------
+http://floss.booktype.pro/csound/preface/ <-- Textbook
+https://csound.com/docs/manual/indexframes.html <-- Canonical Manual
+
+OTHER RESOURCES
+---------------
+
