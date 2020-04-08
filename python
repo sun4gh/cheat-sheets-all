@@ -321,6 +321,18 @@ if you want to a class and subclass instances to show as same type, use isinstan
 https://docs.quantifiedcode.com/python-anti-patterns/readability/do_not_compare_types_use_isinstance.html
 https://stackoverflow.com/questions/1549801/what-are-the-differences-between-type-and-isinstance
 
+Check if an object is derived from a dictionary or a tuple etc even though its type doesn't show as such:
+>>> from sklearn.datasets import load_iris
+>>> iris = load_iris()
+>>> print (type ( iris) )
+<class 'sklearn.utils.Bunch'>
+>>> print (isinstance(iris, dict))
+True
+>>> print (isinstance(iris, tuple))
+False
+
+
+
 
 You need a list of comma separated emails and you have a copy of addresses from Outlook
 =======================================================================================
