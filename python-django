@@ -1,0 +1,20 @@
+
+CREATE A STRUCTURE FOR THE PROJECT
+==================================
+
+conda activate <your-Django-Development-environment>
+
+#the following may not be needed if you've already done it in that environment
+conda install -c conda-forge pyscaffold  # this can also be set up as a channel in a settings file 
+
+#then
+putup --django --gitlab my_project_site
+
+cd my_project_site
+
+# python setup.py develop - instead of this command, try the following
+pip install -e .
+# install the "install" package, and make it editable, and do all that in the current directory
+
+
+
