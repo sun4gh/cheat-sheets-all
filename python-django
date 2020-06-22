@@ -1,4 +1,8 @@
-
+ENV
+===
+$ python -m django --version
+    to see which version in your environment
+    
 CREATE A STRUCTURE FOR THE PROJECT
 ==================================
 
