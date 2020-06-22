@@ -1,10 +1,10 @@
-git config --global user.email "your_email@example.com
+$ git config --global user.email "your_email@example.com
 
 https://help.github.com
 
 Global gitignore
 ================
-git config --global core.excludesfile
+$ git config --global core.excludesfile
 	will show you which file if any is configured as a global .gitignore
 
 
@@ -23,16 +23,19 @@ CREATE LOCAL DIR BEFORE CLONE?
 =============================
 Cloning will create a parent directory for the repo, inside of which there will be the .git repo, and the working files
 Navigate to the parent directory of your choice, to execute:
-  git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-this will create a directory whose name is the repo you're cloning.
+
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+	this will create a directory whose name is the repo you're cloning.
 
 RENAME A REPO
 Rename on github, then re-clone on the local.
 
 MERGING
+=======
 Merge changes on github to local repo
-  git pull
-https://git-scm.com/docs/git-pull
+
+$ git pull
+	https://git-scm.com/docs/git-pull
 
 """ (https://stackoverflow.com/questions/8746631/what-happens-when-i-do-git-pull-origin-master-in-the-develop-branch)
 	git pull origin master
@@ -44,18 +47,30 @@ and
 """
 
 BRANCHES
-	git branch
-gives you a list of branches
+========
 
-	git -d a-specific-branch
-will delete it. You might need to override complaint using -D instead of -d
+Create, Delete, and Reflog (rescue) Branch
+------------------------------------------
+$ git branch
+	returns a list of branches
+	
+$ git -d a-specific-branch
+	will delete it. You might need to override complaint using -D instead of -d
 
-Deleted a branch that wasn't merged?
-	git reflog
-then, find the SHA1 for the commit at the tip of your deleted branch, then just 
-	git checkout [sha]
-And once you're at that commit, you can just git checkout -b [branchname] to recreate the branch from there.
+	Deleted a branch that wasn't merged?
+$ git reflog
+	then, find the SHA1 for the commit at the tip of your deleted branch, then just 
+$ git checkout [sha]
+	And once you're at that commit, you can just git checkout -b [branchname] to recreate the branch from there.
 
+Track a Remote Branch
+---------------------
+$ git branch --set-upstream-to origin/<branchname>
+	or when doing the first push
+$ git push -u origin <branchname>
+
+you can confirm this via 
+$ cat .git/config
 
 FIX WRONG EMAIL USERNAME
 (from https://www.git-tower.com/learn/git/faq/change-author-name-email)
@@ -82,8 +97,8 @@ fi
 
 THEN
 
-git push --force --tags origin 'refs/heads/*'
-(from https://help.github.com/articles/changing-author-info/)
+$ git push --force --tags origin 'refs/heads/*'
+	(from https://help.github.com/articles/changing-author-info/)
 
 
 this might be useful
