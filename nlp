@@ -16,3 +16,30 @@ $ python -m spacy download en_core_web_sm
 $ python -m spacy download en_core_web_lg
 >>> nlp = spacy.load("en_core_web_lg")
 >>> nlp("dog").similarity(nlp("animal"))
+
+text = "Wait till you hear this!"
+doc = nlp(text)
+for token in doc:               # source: https://course.spacy.io
+    # Get the token text, part-of-speech tag and dependency label
+    token_text = token.text
+    token_pos = token.pos_
+    token_dep = token.dep_
+    # This is for formatting only
+    print(f"{token_text:<12}{token_pos:<10}{token_dep:<10}")
+for ent in doc.ents:
+    # Print the entity text and its label
+    print(ent.text, ent.label)
+some_span = doc[1:3]
+print(some_span.text)
+
+>>> from spacy.matcher import Matcher
+matcher = Matcher(nlp.vocab)
+pattern = [
+    {"TEXT": "iPhone", "POS": "DET", "OP": "?",} ,      #these three requirements for the first token match
+    {"TEXT": "X"}                                       #one more requirement for the next token match
+]
+matcher.add("some arbitrary name", None, pattern)
+matches = matcher(doc)
+
+
+
