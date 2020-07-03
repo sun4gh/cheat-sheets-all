@@ -65,3 +65,22 @@ cat_string = nlp.vocab.strings[cat_hash]
 >>> print ( id (doc.vocab.strings))
 5571244880
 
+from spacy.tokens import Doc, Span
+#create a Doc from scratch
+words = ["California", "is", "sunny", "!"]
+spaces = [True, True, False, False]         # or spaces = None, to give space to all tokens
+# Create a Doc from the words and spaces
+doc = Doc(nlp.vocab, words=words, spaces=spaces)
+
+doc = nlp("California is a state.")
+span = Span(doc, 0, 1, label = "PNOUN")
+# Add the span to the doc's entities
+doc.ents = [span]
+print([(ent.text, ent.label_) for ent in doc.ents])
+
+>>> doc[0].vector
+array([-3.0439e-01,  4.9227e-01, -7.6365e-02, -7.5354e-01,  5.8803e-01,
+..
+       -2.5008e-01,  3.6174e-01, -6.3967e-01,  6.6353e-02,  5.3749e-01],
+      dtype=float32)
+>>>
