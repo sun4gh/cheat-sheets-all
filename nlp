@@ -40,7 +40,16 @@ pattern = [
 ]
 matcher.add("some arbitrary name", None, pattern)
 matches = matcher(doc)
-
+doc = nlp("It's the processing in language-processing")
+pattern = [
+    { "TEXT": "language", "POS": "NOUN"},
+    { "TEXT": "-"},
+    { "TEXT": "processing", "POS": "VERB",},            #change the VERB to NOUN for it to find the match
+    ]
+matcher = Matcher(nlp.vocab)
+matcher.add("find language-processing", None, pattern)
+matches = matcher(doc)
+ 
 >>> from spacy.lang.en import English
 >>> nlp = English()
 or
