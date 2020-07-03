@@ -38,7 +38,7 @@ pattern = [
     {"TEXT": "iPhone", "POS": "DET", "OP": "?",} ,      #these three requirements for the first token match
     {"TEXT": "X"}                                       #one more requirement for the next token match
 ]
-matcher.add("some arbitrary name", None, pattern)
+matcher.add("name for the pattern", None, pattern)      #this becomes part of the vocab
 matches = matcher(doc)
 doc = nlp("It's the processing in language-processing")
 pattern = [
@@ -49,6 +49,9 @@ pattern = [
 matcher = Matcher(nlp.vocab)
 matcher.add("find language-processing", None, pattern)
 matches = matcher(doc)
+for match_id, start, end in matcher(doc):
+    # Print pattern string name and text of matched span
+    print(doc.vocab.strings[match_id], doc[start:end].text)
  
 >>> from spacy.lang.en import English
 >>> nlp = English()
