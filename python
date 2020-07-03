@@ -536,6 +536,22 @@ https://www.programiz.com/python-programming/list-comprehension#lcvf   (good exp
 https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
 https://en.wikipedia.org/wiki/List_comprehension (for more information/references on List Comprehensions)
 
+Starred Expressions
+===================
+>>> a = [1,2,3,4]
+>>> print (a[0], a[1], a[2], a[3])
+1 2 3 4
+>>> print (*a)
+1 2 3 4
+>>> print (a)
+[1, 2, 3, 4]
+>>> *a
+  File "<stdin>", line 1
+SyntaxError: can't use starred expression here
+>>> print (**a)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: print() argument after ** must be a mapping, not list
 
 Environment and Interpreter
 ===========================
