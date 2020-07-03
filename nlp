@@ -84,3 +84,10 @@ array([-3.0439e-01,  4.9227e-01, -7.6365e-02, -7.5354e-01,  5.8803e-01,
        -2.5008e-01,  3.6174e-01, -6.3967e-01,  6.6353e-02,  5.3749e-01],
       dtype=float32)
 >>>
+
+#Two different ways to get spans
+span1 = Span(doc, 3, 5)
+span2 = doc[-4:-1]
+print (span1, "similarity to",  span2)
+# Get the similarity of the spans
+print (span1.similarity(span2))
