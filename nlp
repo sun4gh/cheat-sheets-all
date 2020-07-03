@@ -41,5 +41,27 @@ pattern = [
 matcher.add("some arbitrary name", None, pattern)
 matches = matcher(doc)
 
+>>> from spacy.lang.en import English
+>>> nlp = English()
+or
+>>> import spacy
+>>> nlp = spacy.load("en_core_web_lg")
+THEN you can obtain the internal hash used for cat in the two-way lookup StringStore table
+cat_hash = nlp.vocab.strings["cat"]
+cat_string = nlp.vocab.strings[cat_hash]
 
+>>> nlp.vocab.strings["PERSON"]
+380
+>>> nlp.vocab.strings["person"]
+14800503047316267216
+
+# doc exposes vocab also, but basically points to the nlp vocab
+>>> print ( len (doc.vocab.strings))
+1476045
+>>> print ( len (nlp.vocab.strings))
+1476045
+>>> print ( id (nlp.vocab.strings))
+5571244880
+>>> print ( id (doc.vocab.strings))
+5571244880
 
