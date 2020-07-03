@@ -53,6 +53,23 @@ for match_id, start, end in matcher(doc):
     # Print pattern string name and text of matched span
     print(doc.vocab.strings[match_id], doc[start:end].text)
  
+COUNTRIES = ['Afghanistan', 'Åland Islands', 'Albania',         # a few countries to illustrate the Phrase Matcher
+             'Czech Republic',
+             'Italy',
+             'Slovenia',
+             'United Arab Emirates',
+             'Saudi Arabia',
+             'Zambia', 'Zimbabwe']
+nlp = English()
+doc = nlp("Saudi Arabia and United Arab Emirates are both in the Middle East")
+from spacy.matcher import PhraseMatcher
+matcher = PhraseMatcher(nlp.vocab)
+patterns = list(nlp.pipe(COUNTRIES))
+matcher.add("COUNTRY_ENTITY", None, *patterns)
+matches = matcher(doc)
+print( [ (nlp.vocab.strings[match_id], doc[start:end]) for match_id, start, end in matches])
+
+
 >>> from spacy.lang.en import English
 >>> nlp = English()
 or
