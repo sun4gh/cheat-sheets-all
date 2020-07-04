@@ -38,7 +38,7 @@ pattern = [
     {"TEXT": "iPhone", "POS": "DET", "OP": "?",} ,      #these three requirements for the first token match
     {"TEXT": "X"}                                       #one more requirement for the next token match
 ]
-matcher.add("name for the pattern", None, pattern)      #this becomes part of the vocab
+matcher.add("name for the pattern", None, pattern)      #this becomes part of the vocab; arbitrary pattern(s) on one line
 matches = matcher(doc)
 doc = nlp("It's the processing in language-processing")
 pattern = [
