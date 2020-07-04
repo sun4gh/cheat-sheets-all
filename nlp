@@ -53,6 +53,9 @@ for match_id, start, end in matcher(doc):
     # Print pattern string name and text of matched span
     print(doc.vocab.strings[match_id], doc[start:end].text)
  
+if one of your patterns (keys) is "LOWER", make sure the value in the dictionary is lower. e.g. "LOWER":"iphone" , not "LOWER":"iPhone"
+list of patterns here: https://spacy.io/usage/rule-based-matching#adding-patterns-attributes
+
 COUNTRIES = ['Afghanistan', 'Åland Islands', 'Albania',         # a few countries to illustrate the Phrase Matcher
              'Czech Republic',
              'Italy',
