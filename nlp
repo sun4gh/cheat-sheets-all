@@ -144,3 +144,13 @@ Pipelines
 ['tagger', 'parser', 'ner']
 >>> nlp.pipeline
 [('tagger', <spacy.pipeline.pipes.Tagger object at 0x11dda5a10>), ('parser', <spacy.pipeline.pipes.DependencyParser object at 0x11a52afa0>), ('ner', <spacy.pipeline.pipes.EntityRecognizer object at 0x12a5d7210>)]
+
+Customize Pipeline
+------------------
+def custom_component(doc):
+    #e.g.
+    #matches = matcher(doc)
+    #spans = [Span(doc, start, end, label=match_id) for match_id, start, end in matches]
+    #doc.ents = spans
+    return doc
+nlp.add_pipe(custom_component, ___) #the position of First/Last (boolean) or before/after (reference another component)
