@@ -209,3 +209,20 @@ doc = nlp(
 for ent in doc.ents:
     # Print the text and Wikipedia URL of the entity
     print(ent.text, ent._.wikipedia_url)
+
+
+Performance
+===========
+
+for text in TEXTS:
+    doc = nlp(text)
+    #... more stuff per doc
+
+for doc in nlp.pipe(TEXTS)      # faster; nlp.pipe creates a gen, so if you want a list wrap it in list()
+    #... more stuff per doc
+
+if you have DATA that looks like a list of lists, the latter like: [text, context_dict]
+ e.g. [  ["Some text", { "param1 key": "param1 value", "param2 key": "param value", ...} ], ...]
+for doc, context in nlp.pipe(DATA, as_tuples=True):
+
+
