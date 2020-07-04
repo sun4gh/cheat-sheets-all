@@ -536,6 +536,17 @@ https://www.programiz.com/python-programming/list-comprehension#lcvf   (good exp
 https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
 https://en.wikipedia.org/wiki/List_comprehension (for more information/references on List Comprehensions)
 
+Other comprehensions
+====================
+>>> {p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] }					# set comprehension
+{2, 3, 5, 37, 7, 11, 13, 17, 19, 23, 29, 31}
+>>> {p : round(math.sqrt(p),2) for p in range(2,N) if 0 not in [p%d for d in range(2,p)] } 		# dict comprehension
+{2: 1.41, 3: 1.73, 5: 2.24, 7: 2.65, 11: 3.32, 13: 3.61, 17: 4.12, 19: 4.36, 23: 4.8, 29: 5.39, 31: 5.57, 37: 6.08}
+# For tuple comprehension, there is only a workaround to product a tuple in comprehension-like fashion
+>>> tuple (p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] )				# these two both
+>>> tuple([p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] ])				# return tuples
+
+
 Starred Expressions
 ===================
 >>> a = [1,2,3,4]
