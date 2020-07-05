@@ -10,3 +10,23 @@ ls -p
 	add / after a directory
 ls -G
 	Enable colorized output (see CLICOLOR)
+
+
+
+bash Variables
+---------
+export name=value
+	makes the variable available to subprocesses
+vs.
+name=value
+	which does not
+
+If you need a variable accessible via python os module, make sure it's export.
+No spaces around the =
+
+
+MacOS UNIX
+----------
+.bash_profile gets executed every time a new terminal window is launched (unlike UNIX systems)
+you can 
+> Subprocesses will only see the exported variables
