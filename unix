@@ -30,3 +30,10 @@ MacOS UNIX
 .bash_profile gets executed every time a new terminal window is launched (unlike UNIX systems)
 you can 
 > Subprocesses will only see the exported variables
+
+Sound subsystem not working? No sound? Try :
+$ sudo pkill coreaudiod
+$ sudo killall coreaudiod
+https://gist.github.com/felipecsl/5177790
+
+$ sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`
