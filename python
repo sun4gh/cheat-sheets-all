@@ -755,3 +755,23 @@ or pop-from-front-first, even though the set of all operations remains the same)
 >>> len(d)
 1
 
+
+Colored Text in Terminal
+========================
+
+Various methods. A limited but straightforward module is colorama.
+https://pypi.org/project/colorama/
+
+>>> from colorama import init as colorama_init
+>>> from colorama import Fore, Back, Style
+
+>>> colorama_init()
+>>> BOT_NORMAL = Fore.RESET
+>>> INFO_TEXT = Fore.YELLOW
+>>> RESET = Style.RESET_ALL
+
+>>> print(BOT_NORMAL)
+or
+>>> print(f"{BOT_NORMAL}Hello {INFO_TEXT}Info{BOT_NORMAL}")
+
+consider init(autoreset=True) to avoid having to reset color changes at the end of each print statement.
