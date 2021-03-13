@@ -42,3 +42,37 @@ Looking for the password of a wifi already saved, to share?
 $ security find-generic-password -ga “some wifi name“ | grep "password"
 you will be requested to autheticate
 https://www.softwarehow.com/find-wifi-password-mac/
+
+FIND FILES CONTAINING TEXT
+--------------------------
+Simplest, case sensitive:
+	$ grep -rn "text" some.path
+The -r is recursive, and the -n displays the line in the file
+
+e.g.
+	$ grep -rn -C 2 "import" .
+-C 2 will include two lines above and below
+
+To limit to certain files:
+	$ grep -rn -C 2 "import" *.py
+
+search whole words only with -w 
+	$ grep -rnw -C 2 "port" *.py
+
+case insensitive -i
+	$ grep -rnwi -C 2 "IMPORT" *.py
+
+ignore binary files with -I
+
+View a summary of it all with -c (lower c):
+	$ grep -rnwiHc -C 2 "IMPORT" *.py
+Then view the lines by removing -c and adding coloring:
+	$ grep -rnwiH --color=auto  -C 2 "IMPORT" *.py
+
+Change the order if dirs if you prefer (multiple dirs) before the expression:
+	$ grep -rnwiH --color=auto  -C 2 . -e "IMPORT"
+and
+	$ grep -rnwiH --color=auto  -C 2 "." -e "IMPORT"
+	$ grep -rnwiH --color=auto  -C 2 ./*.py -e "IMPORT"
+work.
+	$ grep -rnwiH --color=auto  -C 2 . -e "IMPORT"
