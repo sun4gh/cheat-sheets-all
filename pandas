@@ -547,6 +547,17 @@ Oceania        Australia                   261
                                           ... 
 
 
+#OUTPUT A DATAFRAME
+
+>>> print(a_df[ cols_to_keep ].to_string(index=False) )
+prints the dataframe without index but with leading space.
+       Date   Amount
+ 05/01/2021  -$12.00
+ 04/01/2021   -$7.75
+
+>>> a_df[[ cols_to_keep ]].to_clipboard(index=False) 
+removes the spaces, but doesn't align the decimal point. Can be pasted into excel however.
+
 
 #OTHER SOURCES
 https://www.youtube.com/watch?v=2AFGPdNn4FM
