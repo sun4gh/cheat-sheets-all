@@ -3,15 +3,13 @@ CONDA 4.6 CHEAT SHEET: https://conda.io/projects/conda/en/latest/user-guide/chea
         BASIC
 $ conda --version
 conda 4.10.1
-
-        update conda:
-conda update conda
-        but you have to be in the base environment or use the -n flag? (see below)
-        
 $ conda info
         gives interesting info on the specific environment, conda version, python version
-                
+
         UPDATING CONDA
+        update conda if you're in the base environment:
+$ conda update conda
+        or if not in the base environment:
 $ conda update -n base -c defaults conda
 
         WHERE ANACONDA STORES ENV?
