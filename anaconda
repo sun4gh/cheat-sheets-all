@@ -1,48 +1,57 @@
 CONDA 4.6 CHEAT SHEET: https://conda.io/projects/conda/en/latest/user-guide/cheatsheet.html
 
-  UPDATING CONDA
+        UPDATING CONDA
 $ conda update -n base -c defaults conda
 
-  WHERE ANACONDA STORES ENV?
+        WHERE ANACONDA STORES ENV?
+ 
 $ conda info --envs
 # conda environments:
 #
 base                  *  /anaconda3
 newenv                   /anaconda3/envs/newenv
 
-  WORKING WITH ENVs YOU ALREADY HAVE
-  To activate in a terminal session:
+        CLONE ENV
+$ conda create --name myclone --clone myenv
+        where "myenv" is an existing environment and "myclone" is the new environment to be created 
+  
+        WORKING WITH ENVs YOU ALREADY HAVE
+        To activate in a terminal session:
 $ conda activate the_env
-  To see the packages of the current env (and their version)  :
+
+        To see the packages of the current env (and their version)  :
 $ conda list
-  To see the history of updates in the environment:
+
+        To see the history of updates in the environment:
 $ conda list --revisions
-  Update ALL (in this environment) to most-recent-but-compatible version:
+
+        Update ALL (in this environment) to most-recent-but-compatible version:
 $ conda update --all
 
-  INSTALL SPECIFIC PACKAGE:
-- consider cloning a current env first so you can work in a new env; also remember --revisions flag (see above)
-- in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
+        INSTALL SPECIFIC PACKAGE:
+        - consider cloning a current env first so you can work in a new env; also remember --revisions flag (see above)
+        - in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
 
-Option:
-In terminal activate the environment you want to use.
+        Option:
+        In terminal activate the environment you want to use.
 
-  Search for the package, e.g. librosa:
+        Search for the package, e.g. librosa:
 $ conda search librosa
-  if that fails, user top search field in anaconda.org to find the pacakage, then look at the instructions on that page, e.g.
+        if that fails, user top search field in anaconda.org to find the pacakage, then look at the instructions on that page, e.g.
 $ conda install -c conda-forge librosa 
 
 CONDA and JUPYTER NOTEBOOK
-  1. Move to the directory of the ipynb_to_launch:
+        1. Move to the directory of the ipynb_to_launch:
 $ cd ~/git/.../<directory of ipynb_to_launch>
-  2. Review your options of environments to use:
+        2. Review your options of environments to use:
 $ conda info --envs
-  3. Then, activate the env and confirm it has the correct version of the modules you need
+        3. Then, activate the env and confirm it has the correct version of the modules you nee
 $ conda activate the_env
 $ conda list
-  4. Launch jupyter 
+        4. Launch jupyter 
 $ jupyter notebook ipynb_to_launch
 
 OTHER RESOURCES:
 https://docs.anaconda.com/anaconda/user-guide/getting-started/
 https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html
+https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/       
