@@ -49,6 +49,11 @@ $ conda search librosa
         if that fails, user top search field in anaconda.org to find the pacakage, then look at the instructions on that page, e.g.
 $ conda install -c conda-forge librosa 
 
+        SEARCH FOR MODULE IN MY EXISTING ENVIRONMENTS
+        Sometimes you want to know if you've used a module in any of your environments.
+$ conda search geopy --envs
+        will return all environments of this user that have the module "geopy"  
+        
 CONDA and JUPYTER NOTEBOOK
         1. Move to the directory of the ipynb_to_launch:
 $ cd ~/git/.../<directory of ipynb_to_launch>
