@@ -6,7 +6,7 @@ conda 4.10.1
 $ conda info
         gives interesting info on the specific environment, conda version, python version
 
-        UPDATING CONDA
+        UPDATING CONDA ITSELF so that all conda commands work their best
         update conda if you're in the base environment:
 $ conda update conda
         or if not in the base environment:
