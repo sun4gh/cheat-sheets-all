@@ -70,6 +70,12 @@ $ conda install -c conda-forge librosa
 $ conda search geopy --envs
         will return all environments of this user that have the module "geopy"  
         
+        
+        REMOVE an environment
+$ conda remove -n basic397 --all
+        or,
+$ conda env remove --name basic397
+
 CONDA and JUPYTER NOTEBOOK
         1. Move to the directory of the ipynb_to_launch:
 $ cd ~/git/.../<directory of ipynb_to_launch>
