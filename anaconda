@@ -23,7 +23,23 @@ newenv                   /anaconda3/envs/newenv
         CLONE ENV
 $ conda create --name myclone --clone myenv
         where "myenv" is an existing environment and "myclone" is the new environment to be created 
-  
+ 
+        PRISTINE ENV
+$ conda create --name basic397 python=3.9.7
+
+        __ with Django
+$ conda create --name newdev python=3.9.7 django=3.2.7
+
+                or by re-using env
+$ conda create --name djangoDev --clone basic397
+$ conda install -n djangoDev django=3.2.7
+
+                and if the default channels don't have what you need, find which channel does (see below)        
+$ conda install -c conda-forge -n djangoDev django=3.2.7
+
+        __ with Django and Pandas, without specifying versions
+$ conda create -n djangodev python=3.9.7 django=3.2.7
+
         WORKING WITH ENVs YOU ALREADY HAVE
         To activate in a terminal session:
 $ conda activate the_env
