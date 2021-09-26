@@ -88,3 +88,10 @@ work.
 
 
 
+CHARACTERS
+1. To represent characters other than latin characters, we need more than a table that can only hold 256 symbols. 
+2. That table is called Unicode. Requires 4 bytes.
+3. Packing these (so the computer know whether it's a 1-, 2-, 3-, or 4-byte character is called UTF-8
+4. There are other encodings also, such as UTF-16.
+https://stackoverflow.com/questions/643694/what-is-the-difference-between-utf-8-and-unicode
+	
