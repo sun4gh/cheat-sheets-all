@@ -18,6 +18,17 @@ Perform from a specific moment onward:
 	Start score playback at the specified time, skipping earlier events
 $ csound -+skip_seconds=130.2 some.orc some.sco
 
+Keep sorted score
+-t0, --keep-sorted-score
+	Prevents Csound from deleting the sorted score file, score.srt, upon exit.
+
+-v, --verbose
+	Verbose translate and run. Prints details of orch translation and performance, enabling errors to be more clearly located.
+
+-z NUM, --list-opcodesNUM
+	List opcodes in this version:
+$ csound -z
+
 Using 0dBFS (instead of amplitude)
 -----------
 ; Set the 0dbfs to 1... this tells csound that, for whichever file type it is outputting (e.g 16bit, or 24bit) 
