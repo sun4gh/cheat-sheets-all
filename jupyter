@@ -7,3 +7,18 @@ List links to jupyter notebook server running locally
 -----------------------------------------------------
 $ jupyter notebook list
 
+Debugging
+---------
+
+def my_function(x):
+  import pdb; pdb.set_trace()
+  print(x)
+  
+No need to import anything in python 3.7 (equivalent to above)
+def my_function(x):
+  breakpoint()
+  print(x)
+
+pixiedust provides graphical user interface debugger
+
+https://towardsdatascience.com/debugging-jupyter-notebooks-will-boost-your-productivity-a33387f4fa62
