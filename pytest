@@ -1,0 +1,10 @@
+pytest expects test suites to start with "test"
+
+	pytest -l
+or 
+	py.test -l
+or
+	py.test
+
+pytest will identify each file that begins with "test" as a test suite to run,
+and will run all the methods in it that start (or end) with “test”.
