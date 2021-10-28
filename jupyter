@@ -2,6 +2,16 @@ Table of Contents
 -----------------
 $ conda install -c conda-forge jupyter_contrib_nbextensions
 
+Export to PDF
+-------------
+Try download as "PDF via HTML", or
+$ jupyter nbconvert <filename.ipynb> --to WebPDF
+
+If that fails, check if you have nbconvert, pyppeteer, notebook-to-pdf
+The latter is only installable via pip, it seems.
+
+Be aware of formatting numbered lists.
+You can also export to HTML (single file) then PDF that.
 
 List links to jupyter notebook server running locally
 -----------------------------------------------------
