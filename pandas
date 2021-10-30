@@ -3,6 +3,7 @@ https://nbviewer.jupyter.org/github/pybokeh/jupyter_notebooks/blob/master/pandas
 >>>import pandas as pd
 >>>import numpy as np
 
+
 # CREATING DATAFRAMES
 
 >>>column_keys_list_values_dict = {  "January" : [ 3, 7,9] , "February" : [2,5,6] }
@@ -416,9 +417,13 @@ or
 
 #BASIC METRICS / EXPLORING
 
+drinks_df.info()                             # information about the raw date
+
 drinks_df.describe()                         # gives basic statistics for numerical columns
 
 drinks_df.describe(include = ['object'])     # gives basic counts for object type columns
+
+drinks_df.hist(bins=50, figsize=(20,15) )    # plots histograms for numerical 
 
 #don't look for duplicates in a series, look for duplicatED VALUES
 >>> drinks_df["continent"].duplicated( keep = 'first')
