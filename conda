@@ -41,8 +41,11 @@ $ conda install -c conda-forge -n djangoDev django=3.2.7
 $ conda create -n newappdev python django pytest
         then , add pyscaffold available via conda-forge
 $ conda install -c conda-forge -n newappdev pyscaffold      
-
+        
+        NEW BASE ENV
 Common modules: python, pandas (will install numpy), pytest, django, nbconvert, 
+Then using conda-forge
+$ conda install -c conda-forge jupyter_contrib_nbextensions
 
         WORKING WITH ENVs YOU ALREADY HAVE
         To activate in a terminal session:
