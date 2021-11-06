@@ -43,7 +43,7 @@ $ conda create -n newappdev python django pytest
 $ conda install -c conda-forge -n newappdev pyscaffold      
         
         NEW BASE ENV
-Common modules: python, pandas (will install numpy), pytest, django, nbconvert, 
+Common modules: python, pandas (will install numpy), pytest, django, nbconvert, scikit-learn, 
 Then using conda-forge
 $ conda install -c conda-forge jupyter_contrib_nbextensions
 
