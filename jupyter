@@ -17,6 +17,15 @@ List links to jupyter notebook server running locally
 -----------------------------------------------------
 $ jupyter notebook list
 
+Split Cells:
+CNTRL, SHIFT, -
+
+Not execute a cell
+------------------
+(using cell magic - two %)
+%%script false --no-raise-error
+(last part needed to avoid error)
+
 Debugging
 ---------
 
@@ -32,3 +41,5 @@ def my_function(x):
 pixiedust provides graphical user interface debugger
 
 https://towardsdatascience.com/debugging-jupyter-notebooks-will-boost-your-productivity-a33387f4fa62
+https://medium.com/swlh/some-neat-jupyter-tricks-be0775c3f17
+
