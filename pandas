@@ -414,6 +414,32 @@ or
 >>> drinks_df.index = drinks_df["country"]
 #this doesn't automatically drop the column
 
+#RENAMING COLUMNS
+>>> drinks_df.rename( {'beer_servings': "Beers!"}, inplace=True)
+>>> drinks_df.columns
+Index(['country', 'beer_servings', 'spirit_servings', 'wine_servings',
+       'total_litres_of_pure_alcohol', 'continent'],
+      dtype='object')
+#This did nothing because there is no *row* whose index is 'beer_servings'
+#and with this dictionary assignment, if a key isn't found there is no error raised
+#we need to specify axis=1 (columns)
+>>> drinks_df.rename( {'beer_servings': "Beers!"}, inplace=True, axis=1)
+>>> drinks_df.columns
+Index(['country', 'Beers!', 'spirit_servings', 'wine_servings',
+       'total_litres_of_pure_alcohol', 'continent'],
+      dtype='object')
+#you can omit the axis if the dictionary is is passed to the keyword argument columns
+>>> drinks_df.rename( columns={'spirit_servings': "Spirits!"}, inplace=True)
+>>> drinks_df.columns
+Index(['country', 'Beers!', 'Spirits!', 'wine_servings',
+       'total_litres_of_pure_alcohol', 'continent'],
+      dtype='object')
+>>> drinks_df.rename( columns={'continaaaaant': "Continent"}, inplace=True)
+>>> drinks_df.columns
+Index(['country', 'Beers!', 'Spirits!', 'wine_servings',
+       'total_litres_of_pure_alcohol', 'continent'],
+      dtype='object')
+Therefore, always check if the columns were renamed.
 
 #BASIC METRICS / EXPLORING
 
