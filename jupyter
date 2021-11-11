@@ -43,3 +43,36 @@ pixiedust provides graphical user interface debugger
 https://towardsdatascience.com/debugging-jupyter-notebooks-will-boost-your-productivity-a33387f4fa62
 https://medium.com/swlh/some-neat-jupyter-tricks-be0775c3f17
 
+
+Display
+-------
+    DISPLAY A SERIES WITHOUT AN INDEX
+    
+from IPython.display import HTML
+display(HTML(http://df.to_html(index=False)))
+
+    DISPLAY DF WITH SOME COLUMNS VALUES FORMATTED
+format_dict = {
+  'col1' : lambda x: int(x) ,
+  'col2' : '{:.1f}' ,
+  }
+display (df.style.format(format_dict))
+    to get this into Excel or PPT, append
+.to_excel('temp.xlsx')
+    and there format and copy to PPT. might need to hide the header row.
+    
+    RENDER LINKS
+
+def build_url(key, value):
+  return f'<a href="{some_dict[key]+value}" target="_blank">{value}</a>'
+df['link']= df['number'].apply(lambda x: build_url(link_type, x)  # create links
+    and then
+import html
+from IPython.display import HTML
+df['textcol'] = df['textcol'].apply(lambnda x: html.escape(x))
+    so that  you can
+display(HTML(df.to_html( render_links=True, escape=False, index = False)))
+    escape=True will escape the HTML <achor> code and you won't get links
+    if you don't previously escape the 'textcol', any html in that column will be rendered
+    messing things up and introducing security risks
+    also render_links=False displays links - review
