@@ -442,7 +442,8 @@ Index(['country', 'Beers!', 'Spirits!', 'wine_servings',
 Index(['country', 'Beers!', 'Spirits!', 'wine_servings',
        'total_litres_of_pure_alcohol', 'continent'],
       dtype='object')
-Therefore, always check if the columns were renamed.
+Therefore, always check if the columns were renamed or add the keyword errors='raise'.
+>>> drinks_df.rename( columns={'continaaaaant': "Continent"}, inplace=True, errors='raise')
 
 #BASIC METRICS / EXPLORING
 
