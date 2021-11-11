@@ -390,6 +390,9 @@ DRINKS_URL = "https://raw.githubusercontent.com/justmarkham/pandas-videos/master
 #Data School 
 drinks_df = pd.read_csv(DRINKS_URL)
 
+#sometimes a csv may not read correctly due to encoding
+df = pd.read_csv(flnm, encoding = "ISO-8859-1")
+
 
 #REINDEXING THE ROWS USING A COLUMN
 
