@@ -551,6 +551,11 @@ Oceania        Australia                   261
                Fiji                         77
                                           ... 
 
+#ORDER
+
+sorting by multiple columns, some ascending , some descending
+   .sort_values(by=['col1, 'col2'], ascending=[False, True])
+
 
 #OUTPUT A DATAFRAME
 
