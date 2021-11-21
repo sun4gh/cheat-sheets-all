@@ -2,6 +2,32 @@ Resources
 =========
 http://www.diveintopython.net
 
+- Importing Modules
+- Reversing a list
+- list slicing
+- Mutable vs. Immutable
+- Name binding on Mutables
+- Pass by Reference, Value, Object Reference
+- Introspection: methods on object
+- Python Interpreter History
+- quick dictionary
+- comparing types
+- Outlook emails
+- datastamped copy of file
+- string representing now down to minute
+- managing python packages
+- json vs dictionaries
+- enumerate vs. iter
+- generator vs. iterator
+- list comprehensions
+- Other comprehensions
+- starred expressions
+- environment and interpreter
+- evaluation order
+- colored text in terminal
+
+
+
 Importing
 =========
 
