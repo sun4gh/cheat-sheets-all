@@ -6,6 +6,39 @@ https://nbviewer.jupyter.org/github/pybokeh/jupyter_notebooks/blob/master/pandas
 
 # CREATING DATAFRAMES
 
+
+Quick & Dirty
+-------------
+>>> quick_df = pd.DataFrame(np.random.randint(0,100, size = (8, 3)), columns = list("ABC"))
+>>> continents = ['Africa', 'Antarctica', 'Asia', 'Europe', 'North America', 'Oceania', 'South America']
+>>> quick_df['Continents'] = np.random.choice(continents, 8, p = [.1, .1, .1, .1, .1, .25, .25]) # optional p keyword
+>>> quick_df['Reals']= 10 * np.random.random_sample( (8,) ) -10
+>>> quick_df
+    A   B   C     Continents     Reals
+0  61  78  13  South America -8.351501
+1  39  90  25  South America -9.100971
+2  43  58  86         Europe -4.917833
+3  66  31   1         Europe -3.448130
+4  11  26  77  South America -6.955012
+5  88  46  94        Oceania -9.447187
+6  86  69  68        Oceania -0.805920
+7   6  28  34           Asia -5.633236
+
+>>> pd.DataFrame( np.random.uniform(-2, 2, (8,3)) )
+          0         1         2
+0  1.310096  0.152372  1.302740
+1  0.000859  0.304286  0.059882
+2 -0.534552 -0.217668  0.244429
+3  0.942974  1.410625  0.938755
+4  1.462896  1.478693 -0.720207
+5  1.869713 -1.717054 -1.927320
+6  0.407459  1.399297  0.188751
+7  0.282613 -0.014931 -1.794183
+
+
+Step by Step
+------------
+
 >>>column_keys_list_values_dict = {  "January" : [ 3, 7,9] , "February" : [2,5,6] }
 
 >>>a_df = pd.DataFrame( column_keys_list_values_dict )
