@@ -586,6 +586,9 @@ chipotle_df["item_name"].str.contains("Chicken").astype(int)
 
 # GROUPBY
 
+consider including dropna=False the first time you groupby
+otherwise groupby drops the np.NaN rows and your results may be misleading
+
 >>> drinks_df.groupby( by = [ "continent" ] )["beer_servings"].mean()
 continent
 Africa            61.471698
