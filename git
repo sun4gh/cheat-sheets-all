@@ -20,7 +20,15 @@ First section defines the alias and its location.
 Second section defines a branch and which upstream repo to use for that branch. When you `git push` from the main branch, git will know to use origin as the repo.
 
 See all your remotes:
-git remote -v
+$ git remote -v
+
+$ git status
+may report that you're in sync with the remote but that might be because it doesn't know yet what changes have taken place
+
+$ git fetch origin
+downloads new data from a remote repository, but does not merge them
+use this in order to get current results from the git status 
+
 
 Global gitignore
 ================
