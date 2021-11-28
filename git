@@ -29,6 +29,7 @@ $ git fetch origin
 downloads new data from a remote repository, but does not merge them
 use this in order to get current results from the git status 
 
+https://www.youtube.com/watch?v=Gg4bLk8cGNo
 
 Global gitignore
 ================
