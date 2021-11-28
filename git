@@ -2,6 +2,26 @@ $ git config --global user.email "your_email@example.com
 
 https://help.github.com
 
+Remote vs. Origin
+=================
+remote is a git term for an upstream repository
+'origin' is just a local alias for referencing some specific remote repo.  The name could have been anything, though git defaults to this name. 
+
+	example config file:
+
+[remote "origin"]
+        url = <some_url>.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+        remote = origin
+        merge = refs/heads/main
+
+First section defines the alias and its location.
+Second section defines a branch and which upstream repo to use for that branch. When you `git push` from the main branch, git will know to use origin as the repo.
+
+See all your remotes:
+git remote -v
+
 Global gitignore
 ================
 $ git config --global core.excludesfile
