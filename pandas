@@ -617,6 +617,10 @@ Oceania        Australia                   261
                Fiji                         77
                                           ... 
 
+#RANDOM SELECTION OF UP TO n ITEMS FOR A CATEGORICAL COLUMN
+quick_df = quick_df.sample(frac=1).reset_index(drop=True)
+select_df = quick_df.groupby("Continents").tail(n)
+
 #ORDER
 
 sorting by multiple columns, some ascending , some descending
