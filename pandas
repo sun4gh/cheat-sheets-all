@@ -617,6 +617,26 @@ Oceania        Australia                   261
                Fiji                         77
                                           ... 
 
+
+>>> drinks_df['continent'].value_counts()
+Africa           53
+Europe           45
+Asia             44
+North America    23
+Oceania          16
+South America    12
+Name: continent, dtype: int64
+>>> drinks_df['continent'].value_counts(normalize=True)
+Africa           0.274611
+Europe           0.233161
+Asia             0.227979
+North America    0.119171
+Oceania          0.082902
+South America    0.062176
+Name: continent, dtype: float64
+
+
+
 #RANDOM SELECTION OF UP TO n ITEMS FOR A CATEGORICAL COLUMN
 quick_df = quick_df.sample(frac=1).reset_index(drop=True)
 select_df = quick_df.groupby("Continents").tail(n)
