@@ -635,7 +635,8 @@ Oceania          0.082902
 South America    0.062176
 Name: continent, dtype: float64
 
-
+Good content:
+https://www.youtube.com/watch?v=txMdrV1Ut64
 
 #RANDOM SELECTION OF UP TO n ITEMS FOR A CATEGORICAL COLUMN
 quick_df = quick_df.sample(frac=1).reset_index(drop=True)
