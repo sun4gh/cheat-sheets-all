@@ -26,6 +26,7 @@ http://www.diveintopython.net
 - environment and interpreter
 - evaluation order
 - colored text in terminal
+- argparsing
 
 
 
@@ -811,3 +812,8 @@ or
 >>> print(f"{BOT_NORMAL}Hello {INFO_TEXT}Info{BOT_NORMAL}")
 
 consider init(autoreset=True) to avoid having to reset color changes at the end of each print statement.
+
+
+Arg Parsing
+===========
+https://www.youtube.com/watch?v=OxpBMNalsDM
