@@ -817,3 +817,5 @@ consider init(autoreset=True) to avoid having to reset color changes at the end 
 Arg Parsing
 ===========
 https://www.youtube.com/watch?v=OxpBMNalsDM
+https://www.youtube.com/watch?v=cdblJqEUDNo
+https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
