@@ -480,9 +480,10 @@ Therefore, always check if the columns were renamed or add the keyword errors='r
 
 #BASIC METRICS / EXPLORING
 
-drinks_df.info()                             # information about the raw date
+drinks_df.info()                             # information about the raw data
 
 drinks_df.describe()                         # gives basic statistics for numerical columns
+                                             # use to see if any null values
 
 drinks_df.describe(include = ['object'])     # gives basic counts for object type columns
 
