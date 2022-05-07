@@ -27,6 +27,7 @@ http://www.diveintopython.net
 - evaluation order
 - colored text in terminal
 - argparsing
+- detecting keys pressed (like arrow key)
 
 
 
@@ -819,3 +820,8 @@ Arg Parsing
 https://www.youtube.com/watch?v=OxpBMNalsDM
 https://www.youtube.com/watch?v=cdblJqEUDNo
 https://stackoverflow.com/questions/15008758/parsing-boolean-values-with-argparse
+
+
+Detecting Keys Pressed
+======================
+https://www.daniweb.com/programming/software-development/threads/228595/getting-an-input-from-arrow-keys
