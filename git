@@ -101,6 +101,16 @@ $ git push -u origin <branchname>
 you can confirm this via 
 $ cat .git/config
 
+SEE ALL CHANGES BY username
+---------------------------
+$ git log --oneline --decorate --all --author="username"
+$ git log --pretty=format:"%ad:%an:%d:%B" --all --author=My-name
+$ git log --graph --all --topo-order --decorate --oneline --boundary --author=My-name
+$ git log --graph --pretty=format:'%Cblue%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --author=My-name
+see: https://stackoverflow.com/questions/24745980/how-do-i-display-all-commits-ive-made-on-all-branches
+also consider
+$ git branch --contains <commit>
+
 FIX WRONG EMAIL USERNAME
 (from https://www.git-tower.com/learn/git/faq/change-author-name-email)
 
