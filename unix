@@ -39,7 +39,7 @@ https://gist.github.com/felipecsl/5177790
 $ sudo kill `ps -ax | grep 'coreaudiod' | grep 'sbin' |awk '{print $1}'`
 
 Looking for the password of a wifi already saved, to share?
-$ security find-generic-password -ga “some wifi name“ | grep "password"
+$ security find-generic-password -ga "some wifi name" | grep "password"
 you will be requested to autheticate
 https://www.softwarehow.com/find-wifi-password-mac/
 
