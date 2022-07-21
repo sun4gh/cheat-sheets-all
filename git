@@ -31,6 +31,13 @@ use this in order to get current results from the git status
 
 https://www.youtube.com/watch?v=Gg4bLk8cGNo
 
+Clone Local Repo to Remote
+--------------------------
+1. Manually create the repo on the remote service (e.g. github), skip the initialization with README step.
+2. Configure local repo to point to remote repo ($ git remote add origin git@github.com:sun4gh/myrepo.git)
+3. $ git push --set-upstream origin main
+
+
 Global gitignore
 ================
 $ git config --global core.excludesfile
