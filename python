@@ -607,6 +607,15 @@ Environment and Interpreter
 https://jakevdp.github.io/PythonDataScienceHandbook/01.02-shell-keyboard-shortcuts.html
 
 
+# snippet that checks if we're in the correct conda env
+PREFERRED_CONDA_ENV = "some-env"
+if sys.exec_prefix.split(os.sep)[-1] != PREFERRED_CONDA_ENV:
+	print(f"Aborting!\nCheck whether you're running the preferred environment: {PREFERRED_CONDA_ENV}")
+	exit()
+else:
+	print(f"Detected preferred environment: {PREFERRED_CONDA_ENV}")
+
+
 Evaluation Order
 ================
 
