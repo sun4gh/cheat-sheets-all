@@ -61,6 +61,14 @@ $ conda list --revisions
         Update ALL (in this environment) to most-recent-but-compatible version:
 $ conda update --all
 
+        List revisions of this environment
+$ conda list --revisions
+        more on the specific environment at CONDA_ROOT/envs/ENV_NAME/conda-meta
+
+        Revert to previous revision
+$ conda install --revision N
+        (where N is the revision number from the list operation)
+
         INSTALL SPECIFIC PACKAGE:
         - consider cloning a current env first so you can work in a new env; also remember --revisions flag (see above)
         - in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
