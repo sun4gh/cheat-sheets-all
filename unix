@@ -50,6 +50,12 @@ Soft links
 to create a soft link in the local directory of the remote folder
 drag (if on Mac OS) the remote_folder into the terminal to properly escape it
 
+FIND FILES WITH FILENAME TEXT
+-----------------------------
+	$ find . -name "*.epub" -print
+also
+	$ tree -P "*.epub"
+
 FIND FILES CONTAINING TEXT
 --------------------------
 Simplest, case sensitive:
