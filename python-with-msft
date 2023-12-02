@@ -33,3 +33,17 @@ paragraph_styles = [
 ]
 for style in paragraph_styles:
 	print(style.name)
+
+
+
+Basic Excel Operations
+======================
+
+conda install openpyxl
+
+import pandas as pd
+new_df = pd.read_excel("filename.xlsx")
+new_df.rename ( columns = some_dict, inplace=True)
+new_df = new_df.reindex ( columns = cols_list, fill_value=0)
+new_df.to_excel('new_file.xlsx, index=False)
+
