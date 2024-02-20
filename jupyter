@@ -1,6 +1,19 @@
 Table of Contents
 -----------------
+- Installation
+- Export to PDF
+- List urls of notebooks running locally
+- mark cell to not be executed
+- debugging
+- ways to display information
+
+
+Installation
+------------
 $ conda install -c conda-forge jupyter_contrib_nbextensions
+
+Or 
+$ conda install jupyterlab
 
 Export to PDF
 -------------
@@ -15,6 +28,7 @@ You can also export to HTML (single file) then PDF that.
 
 List links to jupyter notebook server running locally
 -----------------------------------------------------
+Note: this is conda environment specific! (Switch to the appropriate environment first.)
 $ jupyter notebook list
 
 Split Cells:
