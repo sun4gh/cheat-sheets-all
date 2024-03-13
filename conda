@@ -69,6 +69,10 @@ $ conda list --revisions
 $ conda install --revision N
         (where N is the revision number from the list operation)
 
+
+        Force re-install
+$ conda install <package> --force-reinstall
+
         INSTALL SPECIFIC PACKAGE:
         - consider cloning a current env first so you can work in a new env; also remember --revisions flag (see above)
         - in AN check if it's already installed; or use the uninstalled choice in the drop down to find it easily
