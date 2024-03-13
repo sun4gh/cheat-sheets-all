@@ -12,8 +12,9 @@ Installation
 ------------
 $ conda install -c conda-forge jupyter_contrib_nbextensions
 
-Or 
-$ conda install jupyterlab
+Or create a new env to install jupyterlab
+$ conda create --name <newenv> python pandas jupyterlab matplotlib scipy
+Do not install the nb extensions
 
 Export to PDF
 -------------
