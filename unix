@@ -12,6 +12,11 @@ ls -G
 	Enable colorized output (see CLICOLOR)
 
 
+open files
+----------
+
+$ open -a "Sublime Text" response.html
+
 
 bash Variables
 ---------
