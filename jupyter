@@ -3,6 +3,7 @@ Table of Contents
 - Installation
 - Export to PDF
 - List urls of notebooks running locally
+- print current conda env
 - mark cell to not be executed
 - debugging
 - ways to display information
@@ -27,15 +28,22 @@ The latter is only installable via pip, it seems.
 Be aware of formatting numbered lists.
 You can also export to HTML (single file) then PDF that.
 
-List links to jupyter notebook server running locally
------------------------------------------------------
+List urls of notebooks running locally
+--------------------------------------
 Note: this is conda environment specific! (Switch to the appropriate environment first.)
 $ jupyter notebook list
 
 Split Cells:
 CNTRL, SHIFT, -
 
-Not execute a cell
+
+print current conda env
+----------------------
+
+!echo $CONDA_DEFAULT_ENV
+
+
+mark cell to not be executed
 ------------------
 (using cell magic - two %)
 %%script false --no-raise-error
