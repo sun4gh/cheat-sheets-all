@@ -58,6 +58,9 @@ $ conda list
         To see the history of updates in the environment:
 $ conda list --revisions
 
+        To rollback to an earlier revision N
+$ conda install --revision N
+
         Update ALL (in this environment) to most-recent-but-compatible version:
 $ conda update --all
 
