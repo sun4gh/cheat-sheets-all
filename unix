@@ -75,6 +75,9 @@ To limit to certain files:
 	$ grep -rn -C 2 "import" *.py
 also:
 	$ grep -rn --include="*.py" "import" .
+or:
+	$ grep -rn "import" --include="*.py" .
+will spare you any matches in non-python files such as logs.
 
 search whole words only with -w 
 	$ grep -rnw -C 2 "port" *.py
@@ -97,7 +100,19 @@ and
 work.
 	$ grep -rnwiH --color=auto  -C 2 . -e "IMPORT"
 
+NOT WHAT YOU WANT:
+	$ grep -rnwi --color=auto  -C 2 ./*.py -e "IMPORT"
+will not recursively search, because the path given is a bunch of files, not a directory.
+Probably what you want:
+	$ grep -rnwi --color=auto  -C 2 --include="*.py" . -e "IMPORT"
+will recurse on the "." directory, present number of line, look for whole word, ignore case
+present context of 2 lines, use color, and only search certain files.
 
+Summary:
+Edit this if you want control:
+	$ grep -rnwi --color=auto  -C 2 --include="*.py" . -e "IMPORT"
+or use this to start with:
+	$ grep -rn "import" .
 
 CHARACTERS
 1. To represent characters other than latin characters, we need more than a table that can only hold 256 symbols. 
