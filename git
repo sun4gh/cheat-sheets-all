@@ -85,6 +85,16 @@ and
 BRANCHES
 ========
 
+	List all
+
+$ git branch --all
+$ git branch -a
+
+	to see all remote
+$ git fetch --all
+	then
+$ git branch -r
+
 Create, Delete, and Reflog (rescue) Branch
 ------------------------------------------
 $ git branch
