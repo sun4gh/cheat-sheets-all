@@ -43,6 +43,15 @@ Global gitignore
 $ git config --global core.excludesfile
 	will show you which file if any is configured as a global .gitignore
 
+Troubleshooting gitignore
+=========================
+
+If you add files in the .gitignore, and yet they show in `git status` it might be that they were already tracked
+prior to adding them to .gitignore. Untrack them using:
+
+$ git rm --cached package-lock.json 
+$ git rm --cached package.json 
+
 
 Aliases to simplify looking at branches
 =======================================
