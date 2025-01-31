@@ -118,6 +118,14 @@ $ git reflog
 $ git checkout [sha]
 	And once you're at that commit, you can just git checkout -b [branchname] to recreate the branch from there.
 
+
+
+$ git checkout -b section-4-27 section-4-24
+$ git switch -c section-4-27 section-4-24
+	create a new branch using another branch as the base
+$ git log --oneline --graph --decorate --all
+	to inspect afterwards
+
 Track a Remote Branch
 ---------------------
 $ git branch --set-upstream-to origin/<branchname>
