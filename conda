@@ -55,6 +55,10 @@ $ conda activate the_env
         To see the packages of the current env (and their version)  :
 $ conda list
 
+        To see the history of explicit installs in an environment
+        (if the env came from cloning, several dependencies will appear with specific versions)
+$ conda env export --name myenv --from-history
+
         To see the history of updates in the environment:
 $ conda list --revisions
 
