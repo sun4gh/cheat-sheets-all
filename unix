@@ -59,7 +59,7 @@ FIND FILES WITH FILENAME TEXT
 -----------------------------
 	$ find . -name "*.epub" -print
 also
-	$ tree -P "*.epub"
+	$ tree -C  -P "*.epub"
 
 FIND FILES CONTAINING TEXT
 --------------------------
