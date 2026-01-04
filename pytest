@@ -10,5 +10,18 @@ pytest will identify each file that begins with "test" as a test suite to run,
 and will run all the methods in it that start (or end) with “test”.
 
 
-to restrict which tests run:
-	$ python -m pytest -k "substring"
+
+
+to restrict which tests run, and given
+
+	@pytest.mark.slow
+	def test_expensive_operation():
+		assert heavy_computation() == 42
+
+to run that one test:
+
+	$ python -m pytest -k "expensive"
+
+or, to exclude it given the marker
+
+	$ python -m pytest -m "not slow"
