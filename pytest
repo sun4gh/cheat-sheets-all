@@ -9,19 +9,52 @@ or
 pytest will identify each file that begins with "test" as a test suite to run,
 and will run all the methods in it that start (or end) with “test”.
 
+-l means show local variables on failure
 
+---
 
+GIVEN:
+	import pytest
+	
+	@pytest.mark.contract
+	def test_schema_alignment():
+		assert True
+	
+	@pytest.mark.integration
+	def test_schema_validation():
+		assert True
 
-to restrict which tests run, and given
+To run all tests:
+	$ pytest
+or:
+	$ python -m pytest
 
-	@pytest.mark.slow
-	def test_expensive_operation():
-		assert heavy_computation() == 42
+To run all tests in a specific file:
+	$ python -m pytest tests/unit/test_myscript.py
 
-to run that one test:
+To run a single specific test by exact name:
+	$ python -m pytest tests/unit/test_myscript.py::test_schema_alignment
 
-	$ python -m pytest -k "expensive"
+To run only tests whose name contains "alignment":
+	$ python -m pytest tests/unit/test_myscript.py -k alignment
 
-or, to exclude it given the marker
+To exclude tests whose name contains "validation":
+	$ python -m pytest tests/unit/test_myscript.py -k "not validation"
 
-	$ python -m pytest -m "not slow"
+To run only tests marked as contract:
+	$ python -m pytest tests/unit/test_myscript.py -m contract
+
+To run only tests marked as integration:
+	$ python -m pytest tests/unit/test_myscript.py -m integration
+
+To exclude tests marked as integration:
+	$ python -m pytest tests/unit/test_myscript.py -m "not integration"
+
+To combine name-based filtering and markers:
+	$ python -m pytest tests/unit/test_myscript.py -k schema -m contract
+
+To exclude tests by both name and marker:
+	$ python -m pytest tests/unit/test_myscript.py -k "not validation" -m "not integration"
+
+To stop immediately on the first failure:
+	$ python -m pytest tests/unit/test_myscript.py::test_schema_alignment -x
