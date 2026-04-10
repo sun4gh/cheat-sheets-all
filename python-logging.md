@@ -31,6 +31,62 @@ logger.critical("System is unusable") # not used often
 
 What they do:
 - Logger → creates log records
-- Handler → decides where they go
+- Handler → sends logs somewhere and filters by level
 - Formatter → decides how they look
-- setLevel() → filters messages below that severity
+- setLevel() → filters messages below that severity (both logger and handler apply)
+
+---
+
+Given source code:
+```text
+mylib/
+└── src/
+    └── mylib/
+        ├── helper1.py
+        └── helper2.py
+```
+
+and
+```python
+# inside helper1.py / helper2.py
+logger = logging.getLogger(__name__)
+```
+
+Loggers created are typically:
+```text
+mylib.helper1
+mylib.helper2
+```
+
+Hierarchy of Loggers:
+```text
+root
+└── mylib
+    ├── mylib.helper1
+    └── mylib.helper2
+```
+
+Hierarchy provides grouped control:
+
+- Set level for entire package:
+```python
+logging.getLogger("mylib").setLevel(logging.INFO)
+```
+
+- Override one noisy module:
+```python
+logging.getLogger("mylib.helper2").setLevel(logging.ERROR)
+```
+- Attach a handler at `mylib` → can affect all children (if propagation is enabled)
+- Leave rest of app unaffected (when configuring only `mylib`, not root)
+- override only where needed
+
+Consider:
+```python
+# configure only
+logging.getLogger("mylib").setLevel(logging.INFO)
+
+# reuse if needed
+pkg_logger = logging.getLogger("mylib")
+pkg_logger.setLevel(logging.INFO)
+```
