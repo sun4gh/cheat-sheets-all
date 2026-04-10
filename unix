@@ -18,6 +18,17 @@ open files
 $ open -a "Sublime Text" response.html
 
 
+stdout and stderr
+-----------------
+	append: 2>&1 
+	→ send stderr (2) to the same destination as stdout (1)
+
+$ ls /tmp /does_not_exist > out.txt
+	- stdout goes to out.txt (the listing)
+	- stderr stays on screen ("no such file or directory")
+$ ls /tmp /does_not_exist > out.txt 2>&1
+	- both stdout and stderr go to out.txt
+
 bash Variables
 ---------
 export name=value
