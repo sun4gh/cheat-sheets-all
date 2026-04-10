@@ -118,13 +118,36 @@ $ git reflog
 $ git checkout [sha]
 	And once you're at that commit, you can just git checkout -b [branchname] to recreate the branch from there.
 
+Switching, and Restoring files
+------------------------------
+$ git switch <branch>
+	Switch to an existing branch
 
+$ git switch -c <branch>
+	Create and switch to a new branch
 
-$ git checkout -b section-4-27 section-4-24
+$ git restore <file>
+	Restore file from current HEAD (discard local changes)
+
+$ git restore --source=<commit> <file>
+	Restore file from a specific commit
+
+$ git switch --detach <commit>
+	Check out a commit without moving a branch (detached HEAD)
+	Your uncommitted changes can come with you
+	Commit or stash first if you want to be safe
+
+$ git reset --hard <commit>
+	Move current branch to a commit and reset working tree to match
+
 $ git switch -c section-4-27 section-4-24
-	create a new branch using another branch as the base
+	create a new branch section-4-27, and switch, using another branch section-4-24 as the base 
 $ git log --oneline --graph --decorate --all
 	to inspect afterwards
+
+	avoid:
+$ git checkout -b section-4-27 section-4-24
+
 
 Track a Remote Branch
 ---------------------
