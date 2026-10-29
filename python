@@ -546,7 +546,7 @@ List Comprehensions
 ===================
 
 simplest is:
-    [expression for item in list]
+    [expression for item in iterable]
 this returns a NEW list - don't forget the square brackets
 
 Overview examples:
@@ -580,7 +580,8 @@ note: In python 3, the variable i does not extend beyond the scope of the loop
 	[x for x in range(20) if x%2 == 0 if x%5 == 0]      # AND (implicit)
 	[x for x in range(20) if x%2 == 0 and x%5 == 0]     # AND (explicit)
 	[x for x in range(20) if x%2 == 0 or x%5 == 0]      # OR
-you don't need parentheses
+you don't need parentheses unless you have:
+	[x for x in items if (condA or condB) and condX]    # COMPOUND BOOLEAN EXPRESSIONS
 
 Nested list comprehension:
 >>> N = 40
@@ -602,22 +603,26 @@ https://en.wikipedia.org/wiki/List_comprehension (for more information/reference
 >>> [a for (a,b) in [(1,2),(3,4)]]
 [1, 3]
 
-# Generator expression: lazy evaluation (values generated on demand)
+
+Other comprehensions
+====================
+
+# SET comprehension
+>>> {p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] }					# set comprehension
+{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}                                        # order not guaranteed
+
+# DICTIONARY comprehension
+>>> {p : round(math.sqrt(p),2) for p in range(2,N) if 0 not in [p%d for d in range(2,p)] } 		# dict comprehension
+{2: 1.41, 3: 1.73, 5: 2.24, 7: 2.65, 11: 3.32, 13: 3.61, 17: 4.12, 19: 4.36, 23: 4.8, 29: 5.39, 31: 5.57, 37: 6.08}
+
+# GENERATOR expression lazy evaluation (values generated on demand)
 >>> (x*x for x in range(5))
 <generator object ...>
 >>> sum(x*x for x in range(5))
 30
 
-
-Other comprehensions
-====================
->>> {p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] }					# set comprehension
-{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}                                        # order not guaranteed
-
->>> {p : round(math.sqrt(p),2) for p in range(2,N) if 0 not in [p%d for d in range(2,p)] } 		# dict comprehension
-{2: 1.41, 3: 1.73, 5: 2.24, 7: 2.65, 11: 3.32, 13: 3.61, 17: 4.12, 19: 4.36, 23: 4.8, 29: 5.39, 31: 5.57, 37: 6.08}
-
-# No tuple comprehension; therefore, construct a tuple from a generator or list
+# TUPLE comprehension: N/A
+# therefore, construct a tuple from a generator or list
 >>> tuple(  p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] )               # these two both
 >>> tuple( [p for p in range(2,N) if 0 not in [p%d for d in range(2,p)] ])              # return tuples
 # The first avoids constructing an intermediate list because it uses a generator
