@@ -3,6 +3,7 @@ Resources
 http://www.diveintopython.net
 
 - Importing Modules
+- Lambda Expressions
 - Reversing a list
 - list slicing
 - Mutable vs. Immutable
@@ -67,6 +68,35 @@ Traceback (most recent call last):
 NameError: name 'add_two' is not defined
 >>> add2 (12,23)
 35
+
+
+Lambda Expressions
+==================
+
+An anonymous function that implicitly returns the *value* of a single expression
+
+>>> f = lambda x: x * 2
+>>> f(3)
+6
+
+# Equivalent to:
+def f(x):
+    return x * 2
+
+A lambda can return a tuple. The lambda body ends at the first comma outside parentheses, so enclose the tuple in parentheses to make the comma part of the lambda body.
+
+>>> f = lambda x: (x[0], x[1])
+>>> f((3, 5))
+(3, 5)
+
+Common use: sorting by multiple criteria.
+
+>>> counts = {'apple': 3, 'banana': 2, 'cherry': 3}
+>>> sorted(counts.items(), key=lambda x: (-x[1], x[0]))  # don't skip the parentheses
+[('apple', 3), ('cherry', 3), ('banana', 2)]
+
+# -x[1]: frequency descending
+#  x[0]: alphabetical ascending (tie breaker)
 
 
 
